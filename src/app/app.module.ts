@@ -11,6 +11,14 @@ import { MedicationHistoryListingComponent } from './medication-history-listing/
 import { PatientMedicationHistoryComponent } from './patient-medication-history/patient-medication-history.component';
 import { LoginComponent } from './login/login.component';
 import { CadastroContaComponent } from './cadastro-conta/cadastro-conta.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import { StyleClassModule } from 'primeng/styleclass';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -21,13 +29,21 @@ import { CadastroContaComponent } from './cadastro-conta/cadastro-conta.componen
     MedicationHistoryListingComponent,
     PatientMedicationHistoryComponent,
     LoginComponent,
-    CadastroContaComponent
+    CadastroContaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    CheckboxModule,
+    InputTextModule,
+    CardModule,
+    StyleClassModule,
+    ButtonModule,
+    PasswordModule,
+
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

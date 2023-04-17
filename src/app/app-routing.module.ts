@@ -1,8 +1,8 @@
+import { AccessGuard } from './shared/guards/access.guard';
 import { CadastroContaComponent } from './cadastro-conta/cadastro-conta.component';
 import { DrugRegistrationComponent } from './drug-registration/drug-registration.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -15,6 +15,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    canActivate: [AccessGuard],
   },
   {
     path: 'listagem-historico-medicacao',
@@ -22,6 +23,7 @@ const routes: Routes = [
       import('./medication-history-listing/medication-history.module').then(
         (m) => m.MedicationHistoryModule
       ),
+    canActivate: [AccessGuard],
   },
   {
     path: 'login',
@@ -30,14 +32,17 @@ const routes: Routes = [
   {
     path: 'cadastro-conta',
     component: CadastroContaComponent,
+    canActivate: [AccessGuard],
   },
   {
     path: 'cadastro-pacientes',
     component: PatientRegistrationComponent,
+    canActivate: [AccessGuard],
   },
   {
     path: 'cadastro-medicamentos',
     component: DrugRegistrationComponent,
+    canActivate: [AccessGuard],
   },
   { path: '**', redirectTo: 'home' },
 ];

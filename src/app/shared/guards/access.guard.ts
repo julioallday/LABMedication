@@ -1,3 +1,4 @@
+import { AccessLoginService } from './../services/access-login.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -12,8 +13,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AccessGuard implements CanActivate {
-  constructor(private router: Router) {}
-  auth = false;
+  constructor(private accessService: AccessLoginService, private router: Router) {}
+ 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,7 +23,7 @@ export class AccessGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth) {
+    if (this.accessService.verifyAuth('access')) {
       return true;
     } else {
       this.router.navigate(['login']);

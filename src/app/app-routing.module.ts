@@ -1,5 +1,5 @@
 import { AccessGuard } from './shared/guards/access.guard';
-import { CadastroContaComponent } from './cadastro-conta/cadastro-conta.component';
+import { CadastroContaComponent } from './shared/components/cadastro-conta/cadastro-conta.component';
 import { DrugRegistrationComponent } from './drug-registration/drug-registration.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { LoginComponent } from './login/login.component';
@@ -29,11 +29,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'cadastro-conta',
-    component: CadastroContaComponent,
-    canActivate: [AccessGuard],
-  },
+
   {
     path: 'cadastro-pacientes',
     component: PatientRegistrationComponent,

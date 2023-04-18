@@ -10,7 +10,7 @@ import { DrugRegistrationComponent } from './drug-registration/drug-registration
 import { MedicationHistoryListingComponent } from './medication-history-listing/medication-history-listing.component';
 import { PatientMedicationHistoryComponent } from './patient-medication-history/patient-medication-history.component';
 import { LoginComponent } from './login/login.component';
-import { CadastroContaComponent } from './cadastro-conta/cadastro-conta.component';
+import { CadastroContaComponent } from './shared/components/cadastro-conta/cadastro-conta.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
@@ -18,7 +18,6 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { FormsModule } from '@angular/forms';
-
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { FormsModule } from '@angular/forms';
     StyleClassModule,
     ButtonModule,
     PasswordModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent],

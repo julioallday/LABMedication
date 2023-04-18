@@ -32,13 +32,19 @@ export class CadastroContaComponent {
   }
 
   registerUser() {
-    this.objSignUp = {
-      email: this.form.get('email') ? this.form.get('email')!.value : '',
-      pasword: this.form.get('password')
-        ? this.form.get('password')!.value
-        : '',
-    };
-    this.users.push(this.objSignUp);
-    this.accessService.setStorage('users', JSON.stringify(this.users));
+    if (this.form.valid) {
+     this.objSignUp = {
+       email: this.form.get('email') ? this.form.get('email')!.value : '',
+       password: this.form.get('password')
+         ? this.form.get('password')!.value
+         : '',
+     };
+     this.users.push(this.objSignUp);
+     this.accessService.setStorage('users', JSON.stringify(this.users));
+     this.form.get('email')?.reset('');
+     this.form.get('password')?.reset('');
+     this.form.get('confirmPassword')?.reset('');   
+    }
+   
   }
 }

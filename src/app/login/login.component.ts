@@ -14,8 +14,8 @@ export class LoginComponent {
   };
   constructor(private accessService: AccessLoginService, private router: Router) {}
 
-  doLogin() {
-    if (this.accessService.verifyAuth('access')) this.router.navigate(['']) 
+  // doLogin() {
+  //   if (this.accessService.verifyAuth('access')) this.router.navigate(['']) 
       
-  }
+  // }
 }

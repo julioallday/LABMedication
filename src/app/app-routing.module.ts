@@ -29,7 +29,6 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-
   {
     path: 'cadastro-pacientes',
     component: PatientRegistrationComponent,

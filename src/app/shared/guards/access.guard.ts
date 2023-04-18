@@ -23,7 +23,7 @@ export class AccessGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.accessService.verifyAuth('access')) {
+    if (this.accessService.verifyAuth('uses')) {
       return true;
     } else {
       this.router.navigate(['login']);

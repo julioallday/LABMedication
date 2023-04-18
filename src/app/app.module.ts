@@ -17,7 +17,7 @@ import { CardModule } from 'primeng/card';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     StyleClassModule,
     ButtonModule,
     PasswordModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

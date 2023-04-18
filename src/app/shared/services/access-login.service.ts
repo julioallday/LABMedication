@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class AccessLoginService {
   hasUserLogin = false;
 
-
   verifyAuth(key: string) {
     const response = this.getStorage(key);
     if (response == null) {
@@ -18,9 +17,9 @@ export class AccessLoginService {
     }
   }
   getStorage(key: string) {
-    return localStorage.getItem(key);
+    return JSON.parse(localStorage.getItem(key)!);
   }
-  SetStorage(key: string, value: string) {
-    return localStorage.setItem(key, value);
+  setStorage(key: string, value: string) {
+    return JSON.stringify(localStorage.setItem(key, value));
   }
 }

@@ -1,4 +1,4 @@
-import { AccessLoginService } from './../../services/access-login.service';
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -25,9 +25,9 @@ export class CadastroContaComponent {
     pasword: '',
   };
 
-  constructor(private accessService: AccessLoginService) {
-    this.accessService.getStorage('users')
-      ? (this.users = this.accessService.getStorage('users'))
+  constructor(private storage: LocalStorageService) {
+    this.storage.getStorage('users')
+      ? (this.users = this.storage.getStorage('users'))
       : [];
   }
 
@@ -40,7 +40,7 @@ export class CadastroContaComponent {
          : '',
      };
      this.users.push(this.objSignUp);
-     this.accessService.setStorage('users', JSON.stringify(this.users));
+     this.storage.setStorage('users', JSON.stringify(this.users));
      this.form.get('email')?.reset('');
      this.form.get('password')?.reset('');
      this.form.get('confirmPassword')?.reset('');   

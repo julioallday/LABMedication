@@ -1,3 +1,4 @@
+import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,9 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class AccessLoginService {
   hasUserLogin = false;
-
+constructor(private storage: LocalStorageService) {
+  
+}
   verifyAuth(key: string) {
-    const response = this.getStorage(key);
+    const response = this.storage.getStorage(key);
     if (response == null) {
       const authIsFalse = this.hasUserLogin;
       return authIsFalse;
@@ -16,10 +19,5 @@ export class AccessLoginService {
       return authIsTrue;
     }
   }
-  getStorage(key: string) {
-    return JSON.parse(localStorage.getItem(key)!);
-  }
-  setStorage(key: string, value: string) {
-    return JSON.stringify(localStorage.setItem(key, value));
-  }
+
 }

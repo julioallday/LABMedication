@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../shared/services/local-storage.service';
 import { AccessLoginService } from './../shared/services/access-login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,10 +14,10 @@ export class LoginComponent implements OnInit{
     senha: '',
   };
   users: any = []
-  constructor(private accessService: AccessLoginService, private router: Router) {}
+  constructor(private storage: LocalStorageService, private router: Router) {}
 
   ngOnInit() {
-    const localData = this.accessService.getStorage("users")
+    const localData = this.storage.getStorage('users');
     if (localData != null) {
       this.users = localData;
     }

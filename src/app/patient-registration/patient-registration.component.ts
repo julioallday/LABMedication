@@ -11,15 +11,20 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./patient-registration.component.css'],
 })
 export class PatientRegistrationComponent {
+
   formulario: FormGroup;
   generos = ['Masculino', 'Feminino', 'Outro'];
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
+  pacientes: any = [];
 
   constructor(
     private fb: FormBuilder,
     private cep: CepService,
     private storage: LocalStorageService
   ) {
+     this.storage.getStorage('pacientes')
+       ? (this.pacientes = this.storage.getStorage('pacientes'))
+       : [];
     this.formulario = this.fb.group({
       nomeCompleto: [
         '',
@@ -78,9 +83,10 @@ export class PatientRegistrationComponent {
       const cadastroPaciente = {
         id: uuidv4(),
         ...this.formulario.value,
-        medicamentos: []
+        medicamentos: [],
       };
-      this.storage.setStorage('pacientes', cadastroPaciente);
+      this.pacientes.push(cadastroPaciente);
+      this.storage.setStorage('pacientes', this.pacientes);
       console.log(this.storage.getStorage('pacientes'));
       this.formulario.reset('');
     }

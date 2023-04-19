@@ -1,4 +1,4 @@
-<label for="paciente">Buscar paciente</label>
+<!-- <label for="paciente">Buscar paciente</label>
 <input (input)="buscaPacientePeloNome()" (click)="listarPacientes()" [(ngModel)]="paciente.nome" d="paciente"
     type="text">
 
@@ -40,20 +40,6 @@
         </div>
         <div class="form-group">
             <label for="unidade">Unidade:</label>
-            <select id="unidade" formControlName="unidade" class="form-control">
-                <option value="">Selecione uma opção</option>
-                <option *ngFor="let unidade of unidades" [value]="unidade">{{unidade}}</option>
-            </select>
-        </div>
-    
-    
-        <div class="form-group">
-            <label for="quantidade">Quantidade:</label>
-            <input type="text" id="quantidade" class="form-control" formControlName="quantidade">
-        </div>
-    
-        <div class="form-group">
-            <label for="unidade">Unidade:</label>
             <select id="unidade" class="form-control" formControlName="unidade">
                 <option *ngFor="let unidade of unidades" [value]="unidade">{{unidade}}</option>
             </select>
@@ -62,11 +48,14 @@
         <div class="form-group">
             <label for="observacoes">Observações:</label>
             <textarea id="observacoes" class="form-control" formControlName="observacoes"></textarea>
-    
         </div>
+        <div *ngIf="formulario.get('observacoes')?.errors?.['required'] && formulario.get('observacoes')?.touched">
+                        Nome obrigatório
+                    </div>
     
         <div class="form-group">
-            <button type="submit" class="btn btn-primary mr-2" [disabled]="formulario.invalid">
+            <button type="submit" class="btn btn-primary mr-2">
+                [disabled]="formulario.invalid"
                 Salvar
             </button>
             <button type="button" class="btn btn-secondary mr-2" (click)="formulario.reset()">
@@ -81,4 +70,101 @@
 
     </div>
 </div>
+ -->
 
+
+<label for="paciente">Buscar paciente</label>
+<input (input)="buscaPacientePeloNome()" (click)="listarPacientes()" [(ngModel)]="paciente.nome" d="paciente"
+    type="text">
+
+<br>
+<div class="dropdown">
+    <div class="dropdown-content" *ngIf="!showForm">
+        <a *ngFor="let resultado of resultadosDaBusca" (click)="createForm(resultado)"
+            class="dropdown-item">{{resultado.nomeCompleto}}</a>
+    </div>
+    <div *ngIf="showForm">
+        <div>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div>
+                    Nome do paciente:{{pacienteEscolhido.nomeCompleto}}
+                </div>
+                <div class="form-group">
+                    <label for="nomeMedicamento">Nome do medicamento</label>
+                    <input type="text" class="form-control" id="nomeMedicamento" formControlName="nomeMedicamento">
+                    <div *ngIf="formulario.get('nomeMedicamento')?.invalid && (formulario.get('nomeMedicamento')?.dirty || formulario.get('nomeMedicamento')?.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['required']">Campo obrigatório</div>
+                        <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['minlength']">Mínimo de 8 caracteres</div>
+                        <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['maxlength']">Máximo de 80 caracteres</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="data">Data</label>
+                    <input type="date" class="form-control" id="data" formControlName="data">
+                    <div *ngIf="formulario.get('data')?.invalid && (formulario.get('data')?.dirty || formulario.get('data')?.touched)"
+                        class="invalid-feedback">Campo obrigatório</div>
+                </div>
+                <div class="form-group">
+                    <label for="horario">Horário</label>
+                    <input type="time" class="form-control" id="horario" formControlName="horario">
+                    <div *ngIf="formulario.get('horario')?.invalid && (formulario.get('horario')?.dirty || formulario.get('horario')?.touched)"
+                        class="invalid-feedback">Campo obrigatório</div>
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo de medicamento</label>
+                    <select class="form-control" id="tipo" formControlName="tipo">
+                        <option *ngFor="let tipo of tiposMedicamento" [value]="tipo">{{tipo}}</option>
+                    </select>
+                    <div *ngIf="formulario.get('tipo')?.invalid && (formulario.get('tipo')?.dirty || formulario.get('tipo')?.touched)"
+                        class="invalid-feedback">Campo obrigatório</div>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade">Quantidade</label>
+                    <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
+                    <div *ngIf="formulario.get('quantidade')?.invalid && (formulario.get('quantidade')?.dirty || formulario.get('quantidade')?.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="formulario.get('quantidade')?.errors?.['required']">Campo obrigatório</div>
+                        <div *ngIf="formulario.get('quantidade')?.errors?.['pattern']">Formato inválido. Use o formato xx.xx
+                        </div>
+                        <div *ngIf="formulario.get('quantidade')?.errors?.['min']">Valor mínimo é 0.01</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="unidade">Unidade:</label>
+                    <select id="unidade" class="form-control" formControlName="unidade">
+                        <option *ngFor="let unidade of unidades" [value]="unidade">{{unidade}}</option>
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="observacoes">Observações:</label>
+                    <textarea id="observacoes" class="form-control" formControlName="observacoes"></textarea>
+                    <div *ngIf="formulario.get('observacoes')?.invalid && (formulario.get('observacoes')?.dirty || formulario.get('observacoes')?.touched)"
+                        class="invalid-feedback">
+                        <div *ngIf="formulario.get('observacoes')?.errors?.['required']">
+                            Observações são obrigatórias
+                        </div>
+                        <div *ngIf="formulario.get('observacoes')?.errors?.['minlength']">
+                            Observações devem ter pelo menos 8 caracteres
+                        </div>
+                        <div *ngIf="formulario.get('observacoes')?.errors?.['maxlength']">
+                            Observações devem ter no máximo 8000 caracteres
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mr-2" [disabled]="formulario.invalid">
+                        Salvar
+                    </button>
+                    <button type="button" class="btn btn-secondary mr-2" (click)="formulario.reset()">
+                        Limpar
+                    </button>
+                    <button type="button" class="btn btn-secondary" (click)="showForm = false">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

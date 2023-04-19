@@ -1,6 +1,7 @@
 import { LocalStorageService } from './../shared/services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-drug-registration',
@@ -31,10 +32,14 @@ export class DrugRegistrationComponent implements OnInit {
 
   listaPacientes: any = [];
 
+  pacienteEscolhido: any = {};
+
   resultadosDaBusca: any = [];
 
   constructor(private fb: FormBuilder, private storage: LocalStorageService) {
-    this.listaPacientes.push(storage.getStorage('pacientes') || []);
+    this.storage.getStorage('pacientes')
+      ? (this.listaPacientes = this.storage.getStorage('pacientes'))
+      : [];
   }
 
   ngOnInit(): void {
@@ -50,13 +55,17 @@ export class DrugRegistrationComponent implements OnInit {
         },
       ],
       data: [
-        new Date(),
+        new Date().toISOString().substring(0, 10),
         {
           validators: [Validators.required],
         },
       ],
       horario: [
-        new Date(),
+        new Date().toLocaleTimeString('pt-BR', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        }),
         {
           validators: [Validators.required],
         },
@@ -70,11 +79,7 @@ export class DrugRegistrationComponent implements OnInit {
       quantidade: [
         '',
         {
-          validators: [
-            Validators.required,
-            Validators.pattern(/^\d+\.\d{2}$/),
-            Validators.min(0.01),
-          ],
+          validators: [Validators.required, Validators.min(0.01)],
         },
       ],
       unidade: [
@@ -95,11 +100,46 @@ export class DrugRegistrationComponent implements OnInit {
       ],
     });
   }
-  get f() {
-    return this.formulario.controls;
+
+  messageError() {
+    const controlesInvalidos: any = [];
+    for (const controlName in this.formulario.controls) {
+      const control = this.formulario.controls[controlName];
+      if (control.invalid) {
+        controlesInvalidos.push({
+          nomeDoCampo: controlName,
+          erros: control.errors,
+        });
+      }
+    }
+    alert(JSON.stringify(controlesInvalidos));
   }
   onSubmit(): void {
     console.log(this.formulario.value);
+    
+    if (this.formulario.invalid) {
+      this.messageError();
+    } else {
+      const cadastroMedicamento = {
+        id: uuidv4(),
+        ...this.formulario.value,
+      };
+
+      this.pacienteEscolhido.medicamentos.push(cadastroMedicamento);
+      const pacienteMedicado = this.pacienteEscolhido;
+
+      const newArray = this.listaPacientes.map((obj: any) => {
+        if (obj.id === pacienteMedicado.id) {
+          return pacienteMedicado;
+        }
+        return obj;
+      });
+
+      this.storage.setStorage('pacientes', newArray);
+      console.log(this.storage.getStorage('pacientes'));
+
+      this.formulario.reset('');
+    }
   }
   listarPacientes(array: any[] = this.listaPacientes) {
     this.resultadosDaBusca = array;
@@ -118,4 +158,10 @@ export class DrugRegistrationComponent implements OnInit {
       return nomeMinusculo.includes(termoMinusculo);
     });
   };
+  createForm(obj: any) {
+    console.log(obj);
+    this.pacienteEscolhido = obj;
+
+    this.showForm = true;
+  }
 }

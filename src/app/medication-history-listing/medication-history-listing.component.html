@@ -2,8 +2,8 @@
 
 <!-- Barra de pesquisa -->
 <div class="search-bar">
-    <input type="text" placeholder="Pesquisar paciente...">
-    <button>Buscar</button>
+    <input (blur)="listarPacientes()"  [(ngModel)]="paciente.nome" type="text" placeholder="Pesquisar paciente...">
+    <button (click)="buscaPacientePeloNome()">Buscar</button>
 </div>
 
 <!-- Listagem de pacientes cadastrados -->
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="m-2" *ngFor="let paciente of pacientes; let i = index">
+        <tr class="m-2" *ngFor="let paciente of resultadosDaBusca; let i = index">
             <td>0000000{{ i + 1 }}</td>
             <td>{{ paciente.nomeCompleto}}</td>
             <td>{{ paciente.convenio }}</td>

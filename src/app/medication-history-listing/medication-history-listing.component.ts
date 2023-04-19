@@ -8,15 +8,40 @@ import { Component } from '@angular/core';
 })
 export class MedicationHistoryListingComponent {
   pacientes: any = [];
+  resultadosDaBusca: any = [];
+  paciente: any = {
+    nome: '',
+  };
 
   constructor(private storage: LocalStorageService) {
     this.storage.getStorage('pacientes')
       ? (this.pacientes = this.storage.getStorage('pacientes'))
       : [];
+    this.listarPacientes();
   }
 
   verDetalhes(obj: any) {
     console.log(obj);
-    
   }
+  listarPacientes(array: any[] = this.pacientes) {
+    this.resultadosDaBusca = array;
+  }
+  buscaPacientePeloNome() {
+    if (!this.paciente.nome) {
+      this.listarPacientes();
+    } else {
+      const pacientesEncontrados = this.pesquisarPaciente(
+        this.pacientes,
+        this.paciente.nome
+      );
+      this.listarPacientes(pacientesEncontrados);
+    }
+  }
+  pesquisarPaciente = (pacientes: any[], termo: string) => {
+    return pacientes.filter((paciente: any) => {
+      const nomeMinusculo = paciente.nomeCompleto.toLowerCase();
+      const termoMinusculo = termo.toLowerCase();
+      return nomeMinusculo.includes(termoMinusculo);
+    });
+  };
 }

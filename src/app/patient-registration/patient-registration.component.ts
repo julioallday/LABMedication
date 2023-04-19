@@ -1,7 +1,9 @@
+import { LocalStorageService } from './../shared/services/local-storage.service';
 import { CepService } from './../shared/services/cep.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Endereco } from '../shared/models/Endereco.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-patient-registration',
@@ -13,7 +15,11 @@ export class PatientRegistrationComponent {
   generos = ['Masculino', 'Feminino', 'Outro'];
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
 
-  constructor(private fb: FormBuilder, private cep: CepService) {
+  constructor(
+    private fb: FormBuilder,
+    private cep: CepService,
+    private storage: LocalStorageService
+  ) {
     this.formulario = this.fb.group({
       nomeCompleto: [
         '',
@@ -24,24 +30,11 @@ export class PatientRegistrationComponent {
         ],
       ],
       genero: ['', Validators.required],
-      dataNascimento: [
-        '',
-        Validators.required,
-      ],
-      cpf: [
-        '',
-        [
-          Validators.required,
-        ],
-      ],
-      rgOrgaoExpedidor: ['', Validators.required, Validators.maxLength(25)],
+      dataNascimento: ['', Validators.required],
+      cpf: ['', [Validators.required]],
+      rgOrgaoExpedidor: ['', Validators.required, Validators.maxLength(20)],
       estadoCivil: ['', Validators.required],
-      telefone: [
-        '',
-        [
-          Validators.required,
-        ],
-      ],
+      telefone: ['', [Validators.required]],
       email: ['', Validators.email],
       naturalidade: [
         '',
@@ -51,12 +44,7 @@ export class PatientRegistrationComponent {
           Validators.maxLength(100),
         ],
       ],
-      contatoEmergencia: [
-        '',
-        [
-          Validators.required,
-        ],
-      ],
+      contatoEmergencia: ['', [Validators.required]],
       alergias: [''],
       cuidadosEspecificos: [''],
       convenio: [''],
@@ -74,7 +62,27 @@ export class PatientRegistrationComponent {
   }
 
   enviar() {
-    console.log(this.formulario.value);
+    const controlesInvalidos: any = [];
+    if (this.formulario.invalid) {
+      for (const controlName in this.formulario.controls) {
+        const control = this.formulario.controls[controlName];
+        if (control.invalid) {
+          controlesInvalidos.push({
+            nomeDoCampo: controlName,
+            erros: control.errors,
+          });
+        }
+      }
+      alert(JSON.stringify(controlesInvalidos));
+    } else {
+      const cadastroPaciente = {
+        id: uuidv4(),
+        ...this.formulario.value,
+      };
+      this.storage.setStorage('pacientes', cadastroPaciente);
+      console.log(this.storage.getStorage('pacientes'));
+      this.formulario.reset('');
+    }
   }
   buscarCep() {
     const cepControl = this.formulario.get('cep')!;

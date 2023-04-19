@@ -20,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     PasswordModule,
     ReactiveFormsModule,
     InputMaskModule,
-
+    ToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

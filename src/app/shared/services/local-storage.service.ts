@@ -9,6 +9,6 @@ export class LocalStorageService {
     return JSON.parse(localStorage.getItem(key)!);
   }
   setStorage(key: string, value: string) {
-    return JSON.stringify(localStorage.setItem(key, value));
+    return localStorage.setItem(key, JSON.stringify(value));
   }
 }

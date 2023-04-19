@@ -1,5 +1,4 @@
 import { AccessGuard } from './shared/guards/access.guard';
-import { CadastroContaComponent } from './shared/components/cadastro-conta/cadastro-conta.component';
 import { DrugRegistrationComponent } from './drug-registration/drug-registration.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { LoginComponent } from './login/login.component';

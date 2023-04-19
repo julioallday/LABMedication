@@ -1,1 +1,27 @@
-<p>medication-history-listing works!</p>
+<h1>Histórico de Medicação</h1>
+
+<!-- Barra de pesquisa -->
+<div class="search-bar">
+    <input type="text" placeholder="Pesquisar paciente...">
+    <button>Buscar</button>
+</div>
+
+<!-- Listagem de pacientes cadastrados -->
+<table>
+    <thead>
+        <tr>
+            <th>Registro</th>
+            <th>Nome do Paciente</th>
+            <th>Convênio</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="m-2" *ngFor="let paciente of pacientes; let i = index">
+            <td>0000000{{ i + 1 }}</td>
+            <td>{{ paciente.nomeCompleto}}</td>
+            <td>{{ paciente.convenio }}</td>
+            <td><button (click)="verDetalhes(paciente)">Detalhes</button></td>
+        </tr>
+    </tbody>
+</table>

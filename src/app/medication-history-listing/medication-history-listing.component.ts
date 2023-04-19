@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LocalStorageService } from './../shared/services/local-storage.service';
 import { Component } from '@angular/core';
 
@@ -13,7 +14,7 @@ export class MedicationHistoryListingComponent {
     nome: '',
   };
 
-  constructor(private storage: LocalStorageService) {
+  constructor(private storage: LocalStorageService, private router: Router) {
     this.storage.getStorage('pacientes')
       ? (this.pacientes = this.storage.getStorage('pacientes'))
       : [];
@@ -21,7 +22,6 @@ export class MedicationHistoryListingComponent {
   }
 
   verDetalhes(obj: any) {
-    console.log(obj);
   }
   listarPacientes(array: any[] = this.pacientes) {
     this.resultadosDaBusca = array;

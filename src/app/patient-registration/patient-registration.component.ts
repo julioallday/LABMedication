@@ -78,6 +78,7 @@ export class PatientRegistrationComponent {
       const cadastroPaciente = {
         id: uuidv4(),
         ...this.formulario.value,
+        medicamentos: []
       };
       this.storage.setStorage('pacientes', cadastroPaciente);
       console.log(this.storage.getStorage('pacientes'));

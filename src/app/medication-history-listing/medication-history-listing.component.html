@@ -21,7 +21,7 @@
             <td>0000000{{ i + 1 }}</td>
             <td>{{ paciente.nomeCompleto}}</td>
             <td>{{ paciente.convenio }}</td>
-            <td><button (click)="verDetalhes(paciente)">Detalhes</button></td>
+            <td><button [routerLink]="['detalhes-paciente', paciente.id]" (click)="verDetalhes(paciente)">Detalhes</button></td>
         </tr>
     </tbody>
 </table>

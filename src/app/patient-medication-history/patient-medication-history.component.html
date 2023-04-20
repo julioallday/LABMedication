@@ -1,1 +1,42 @@
-<p>patient-medication-history works!</p>
+<div class="container">
+    <h1>Detalhes do paciente</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ paciente.nomeCompleto }}</h5>
+            <p class="card-text">Convênio: {{ paciente.convenio }}</p>
+            <p class="card-text">Contato de emergência: {{ paciente.contatoEmergencia }}</p>
+            <p class="card-text">Alergias:</p>
+            <ul>
+                <li *ngFor="let alergia of paciente.alergias">{{ alergia }}</li>
+            </ul>
+            <p class="card-text">Cuidados específicos:</p>
+            <ul>
+                <li *ngFor="let cuidado of paciente.cuidadosEspecificos">{{ cuidado }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Histórico de medicação</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data e hora</th>
+                <th>Editar/Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medicacao of historico">
+                <td>{{ medicacao.nomeMedicamento }}</td>
+                <td>{{ medicacao.data | date: 'dd/MM/yyyy' }} | {{medicacao.horario}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="editarMedicacao(medicacao)">Editar</button>
+                    <button class="btn btn-danger" (click)="deletarMedicacao(medicacao)">Deletar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary" (click)="cadastrarMedicacao()">Cadastrar medicação</button> -->
+ </div>

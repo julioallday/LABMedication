@@ -8,7 +8,7 @@ export class LocalStorageService {
   getStorage(key: string) {
     return JSON.parse(localStorage.getItem(key)!);
   }
-  setStorage(key: string, value: string) {
+  setStorage(key: string, value: any) {
     return localStorage.setItem(key, JSON.stringify(value));
   }
 }

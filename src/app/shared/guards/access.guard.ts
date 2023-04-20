@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  NavigationExtras,
   Router,
   RouterStateSnapshot,
   UrlTree,
@@ -13,8 +14,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AccessGuard implements CanActivate {
-  constructor(private accessService: AccessLoginService, private router: Router) {}
- 
+  constructor(
+    private accessService: AccessLoginService,
+    private router: Router
+  ) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,11 +27,11 @@ export class AccessGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // if (this.accessService.verifyAuth('users')) {
+    if (this.accessService.isLoggedIn) {
       return true;
-    // } else {
-    //   this.router.navigate(['login']);
-    //   return false;
-    // }
+    } else {
+      this.router.navigate(['login']);
+      return false;
+    }
   }
 }

@@ -20,7 +20,7 @@ export class CadastroContaComponent {
     ]),
   });
   users: any[] = [];
-  objSignUp: any = {
+  user: any = {
     email: '',
     pasword: '',
   };
@@ -33,14 +33,16 @@ export class CadastroContaComponent {
 
   registerUser() {
     if (this.form.valid) {
-     this.objSignUp = {
+     this.user = {
        email: this.form.get('email') ? this.form.get('email')!.value : '',
        password: this.form.get('password')
          ? this.form.get('password')!.value
          : '',
+        isLoggedIn: false
      };
-     this.users.push(this.objSignUp);
-     this.storage.setStorage('users', JSON.stringify(this.users));
+      this.users.push(this.user);
+      
+     this.storage.setStorage('users', this.users);
      this.form.get('email')?.reset('');
      this.form.get('password')?.reset('');
      this.form.get('confirmPassword')?.reset('');   

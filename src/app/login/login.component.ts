@@ -1,6 +1,6 @@
 import { LocalStorageService } from './../shared/services/local-storage.service';
 import { AccessLoginService } from './../shared/services/access-login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +8,24 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   login = {
     email: '',
     senha: '',
   };
-  users: any = []
-  constructor(private storage: LocalStorageService, private router: Router) {}
+  users: any = [];
+
+  title = 'login';
+
+  @Output() enviado = new EventEmitter<string>();
+
+  constructor(
+    private storage: LocalStorageService,
+    private router: Router,
+    private accessService: AccessLoginService
+  ) {
+    
+  }
 
   ngOnInit() {
     const localData = this.storage.getStorage('users');
@@ -24,12 +35,18 @@ export class LoginComponent implements OnInit{
   }
 
   signIn() {
-    const isUserExist = this.users.some((e: any) => e.email == this.login.email && e.password == this.login.senha)
+    const isUserExist = this.users.some(
+      (e: any) => e.email == this.login.email && e.password == this.login.senha
+    );
+
     if (isUserExist) {
-      alert("Login efetuado com sucesso!")
-      this.router.navigate(['home'])
+      this.accessService.setLoggedIn(this.login);
+      setTimeout(() => {
+        this.router.navigate(['home']);
+        
+      }, 1000);
     } else {
-      alert("Dados incorretos.")
+      alert('Dados incorretos.');
     }
-}
+  }
 }

@@ -21,6 +21,9 @@ import { PasswordModule } from 'primeng/password';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
+import { MenuLateralComponent } from './shared/components/menu-lateral/menu-lateral.component';
+import { SidebarModule } from 'primeng/sidebar';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { ToastModule } from 'primeng/toast';
     PatientMedicationHistoryComponent,
     LoginComponent,
     CadastroContaComponent,
+    MenuLateralComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     InputMaskModule,
     ToastModule,
+    SidebarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

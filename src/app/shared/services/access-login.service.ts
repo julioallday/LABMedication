@@ -6,18 +6,32 @@ import { Injectable } from '@angular/core';
 })
 export class AccessLoginService {
   hasUserLogin = false;
-constructor(private storage: LocalStorageService) {
-  
-}
-  verifyAuth(key: string) {
-    const response = this.storage.getStorage(key);
-    if (response == null) {
-      const authIsFalse = this.hasUserLogin;
-      return authIsFalse;
-    } else {
-      const authIsTrue = !this.hasUserLogin;
-      return authIsTrue;
-    }
+  users: any[];
+  constructor(private storage: LocalStorageService) {
+    this.users = storage.getStorage('users')
+      ? storage.getStorage('users')
+      : [];
+  }
+  setLoggedIn(userInformations: any) {
+     const user = this.users.find(
+       (el: any) =>
+         el.email == userInformations.email &&
+         el.password == userInformations.senha
+     );
+     user.isLoggedIn = true;
+
+     const newArray = this.users.map((obj: any) => {
+       if (obj.id === user.id) {
+         return user;
+       }
+       return obj;
+     });
+     this.storage.setStorage('users', newArray);
+     this.storage.setStorage('sessionAuth', `${user.email}`);
+     alert('Login efetuado com sucesso!');
   }
 
+  get isLoggedIn() {
+    return localStorage.getItem('sessionAuth') ? true : false;
+  }
 }

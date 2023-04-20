@@ -15,6 +15,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
     canActivate: [AccessGuard],
+    data: { title: 'Estatísticas e informações' },
   },
   {
     path: 'listagem-historico-medicacao',
@@ -23,6 +24,7 @@ const routes: Routes = [
         (m) => m.MedicationHistoryModule
       ),
     canActivate: [AccessGuard],
+    data: { title: 'Listagem de Histórico de Medicação' },
   },
   {
     path: 'login',
@@ -32,11 +34,13 @@ const routes: Routes = [
     path: 'cadastro-pacientes',
     component: PatientRegistrationComponent,
     canActivate: [AccessGuard],
+    data: { title: 'Cadastro de Paciente' },
   },
   {
     path: 'cadastro-medicamentos',
     component: DrugRegistrationComponent,
     canActivate: [AccessGuard],
+    data: { title: 'Cadastro de Medicamento' },
   },
   { path: '**', redirectTo: 'home' },
 ];

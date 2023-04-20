@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: 'detalhes-paciente/:id',
     component: PatientMedicationHistoryComponent,
+    data: { title: 'Histórico de Medicação de Paciente' },
   },
 ];
 

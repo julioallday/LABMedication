@@ -1,0 +1,47 @@
+<div *ngIf="sidebarVisible">
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                LABMedication
+            </button>
+            <a class="navbar-brand" href="#">{{titulo}}</a>
+            <div class="d-flex">
+                <span class="navbar-text me-2">{{usuario}}</span>
+                <a class="nav-link" href="#" (click)="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Conteúdo do menu aqui -->
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="bg-light border-end" id="sidebar-wrapper">
+                <div class="list-group list-group-flush">
+                    <div class="sidebar-heading">Geral</div>
+                    <a [routerLink]="['home']" routerLinkActive="active" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home"></i> Início
+                    </a>
+                    <div class="sidebar-heading">Cadastrar</div>
+                    <a [routerLink]="['cadastro-pacientes']" routerLinkActive="active"
+                        class="list-group-item list-group-item-action">
+                        <i class="fas fa-user"></i> Paciente
+                    </a>
+                    <a [routerLink]="['cadastro-medicamentos']" routerLinkActive="active"
+                        class="list-group-item list-group-item-action">
+                        <i class="fas fa-pills"></i> Medicamento
+                    </a>
+                    <div class="sidebar-heading">Histórico</div>
+                    <a [routerLink]="['listagem-historico-medicacao']" routerLinkActive="active"
+                        class="list-group-item list-group-item-action">
+                        <i class="fas fa-list"></i>Listar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

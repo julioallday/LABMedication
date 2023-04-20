@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
-  ngOnInit(): void {
+  constructor() {}
+  ngOnInit() {
   }
 
 }

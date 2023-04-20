@@ -18,13 +18,15 @@ export class MenuLateralComponent implements OnInit {
   url: string = '';
   titulo = '';
   usuario = '';
-  constructor(private router: Router, private storage: LocalStorageService) {}
+  constructor(
+    private router: Router,
+    private storage: LocalStorageService,
+    private accesService: AccessLoginService
+  ) {}
   ngOnInit() {
-
-   this.usuario = this.storage.getStorage('sessionAuth');
+    this.usuario = this.storage.getStorage('sessionAuth');
 
     this.router.events.subscribe((event) => {
-      // console.log(event);
       if (event instanceof NavigationEnd) {
         const title =
           this.router.routerState.snapshot.root.firstChild!.data['title'];
@@ -40,6 +42,9 @@ export class MenuLateralComponent implements OnInit {
     });
   }
 
-  logout() {}
-  receberTitulo() {}
+  logout() {
+    setTimeout(() => {
+      this.accesService.setLogOut();
+    }, 500);
+  }
 }

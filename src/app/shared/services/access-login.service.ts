@@ -34,4 +34,7 @@ export class AccessLoginService {
   get isLoggedIn() {
     return localStorage.getItem('sessionAuth') ? true : false;
   }
+  setLogOut() {
+    this.storage.removeStorage('sessionAuth');
+  }
 }

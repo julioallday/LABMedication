@@ -4,12 +4,10 @@
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
                 LABMedication
             </button>
-            <a class="navbar-brand" href="#">{{titulo}}</a>
+            <span class="navbar-brand">{{titulo}}</span>
             <div class="d-flex">
                 <span class="navbar-text me-2">{{usuario}}</span>
-                <a class="nav-link" href="#" (click)="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
+              <a style="color: aliceblue;" [routerLink]="['login']" (click)="logout()">Sair</a>
             </div>
         </div>
     </nav>

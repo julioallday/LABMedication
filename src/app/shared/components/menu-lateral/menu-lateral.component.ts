@@ -1,12 +1,10 @@
 import { LocalStorageService } from './../../services/local-storage.service';
 import { AccessLoginService } from './../../services/access-login.service';
 import {
-  ActivatedRoute,
-  ChildActivationEnd,
   NavigationEnd,
   Router,
 } from '@angular/router';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-menu-lateral',

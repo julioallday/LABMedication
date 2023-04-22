@@ -10,6 +10,7 @@
         </div>
     </div>
 
+
     <h2>Histórico de medicação</h2>
 
     <table class="table">
@@ -25,11 +26,13 @@
                 <td>{{ medicacao.nomeMedicamento }}</td>
                 <td>{{ medicacao.data | date: 'dd/MM/yyyy' }} | {{medicacao.horario}}</td>
                 <td>
-                    <button class="btn btn-primary">Editar</button>
+                    <a [routerLink]="['../../../cadastro-medicamentos', medicacao.id]"> <button
+                            class="btn btn-primary">Editar</button></a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-   <a [routerLink]="['../../../cadastro-medicamentos']"><button class="btn btn-primary">Cadastrar medicação</button></a> 
- </div>
+    <a [routerLink]="['../../../cadastro-medicamentos', paciente.id]"><button class="btn btn-primary">Cadastrar 
+            medicação</button></a>
+</div>

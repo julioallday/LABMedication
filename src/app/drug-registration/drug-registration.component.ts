@@ -2,6 +2,7 @@ import { LocalStorageService } from './../shared/services/local-storage.service'
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-drug-registration',
@@ -10,6 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class DrugRegistrationComponent implements OnInit {
   formulario!: FormGroup;
+
+  url!: string
 
   showForm = false;
 
@@ -36,12 +39,11 @@ export class DrugRegistrationComponent implements OnInit {
 
   resultadosDaBusca: any = [];
 
-  constructor(private fb: FormBuilder, private storage: LocalStorageService) {
+  constructor(private fb: FormBuilder, private storage: LocalStorageService, private router: ActivatedRoute) {
     this.storage.getStorage('pacientes')
       ? (this.listaPacientes = this.storage.getStorage('pacientes'))
       : [];
   }
-
   ngOnInit(): void {
     this.formulario = this.fb.group({
       nomeMedicamento: [
@@ -99,6 +101,37 @@ export class DrugRegistrationComponent implements OnInit {
         },
       ],
     });
+    this.router.params.subscribe((params: any) => {
+      this.url = params['id']
+      const paciente = this.listaPacientes.find((el: any) => {
+        if (el.medicamentos) {
+        return el.medicamentos.find((el: any) => {
+         return el.id === this.url
+        })
+        }
+      })
+      console.log(paciente);
+     const medicamento = paciente.medicamentos.find((el: any) => {
+        return el.id === this.url
+      })
+      if (params) {
+        if (medicamento !== undefined) {
+           this.showForm = !this.showForm
+        this.pacienteEscolhido = paciente
+        this.formulario.get('nomeMedicamento')?.patchValue(medicamento.nomeMedicamento);
+        this.formulario.get('data')?.setValue(medicamento.data);
+        this.formulario.get('horario')?.setValue(medicamento.horario);
+        this.formulario.get('tipo')?.setValue(medicamento.tipo);
+        this.formulario.get('quantidade')?.setValue(medicamento.quantidade);
+        this.formulario.get('unidade')?.setValue(medicamento.unidade);
+        this.formulario.get('observacoes')?.setValue(medicamento.observacoes);
+        }
+        else {
+           this.showForm = !this.showForm
+        this.pacienteEscolhido = paciente
+       }
+      }
+    })
   }
 
   messageError() {
@@ -134,7 +167,6 @@ export class DrugRegistrationComponent implements OnInit {
         }
         return obj;
       });
-
       this.storage.setStorage('pacientes', newArray);
       console.log(this.storage.getStorage('pacientes'));
 

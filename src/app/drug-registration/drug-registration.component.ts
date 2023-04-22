@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import { ActivatedRoute } from '@angular/router';
+import { PacienteService } from '../shared/services/paciente.service';
 
 @Component({
   selector: 'app-drug-registration',
@@ -39,10 +40,11 @@ export class DrugRegistrationComponent implements OnInit {
 
   resultadosDaBusca: any = [];
 
-  constructor(private fb: FormBuilder, private storage: LocalStorageService, private router: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private storage: LocalStorageService, private router: ActivatedRoute, private pacienteService: PacienteService) {
     this.storage.getStorage('pacientes')
       ? (this.listaPacientes = this.storage.getStorage('pacientes'))
       : [];
+    
   }
   ngOnInit(): void {
     this.formulario = this.fb.group({
@@ -110,12 +112,10 @@ export class DrugRegistrationComponent implements OnInit {
         })
         }
       })
-      console.log(paciente);
      const medicamento = paciente.medicamentos.find((el: any) => {
         return el.id === this.url
       })
       if (params) {
-        if (medicamento !== undefined) {
            this.showForm = !this.showForm
         this.pacienteEscolhido = paciente
         this.formulario.get('nomeMedicamento')?.patchValue(medicamento.nomeMedicamento);
@@ -126,11 +126,6 @@ export class DrugRegistrationComponent implements OnInit {
         this.formulario.get('unidade')?.setValue(medicamento.unidade);
         this.formulario.get('observacoes')?.setValue(medicamento.observacoes);
         }
-        else {
-           this.showForm = !this.showForm
-        this.pacienteEscolhido = paciente
-       }
-      }
     })
   }
 
@@ -161,6 +156,7 @@ export class DrugRegistrationComponent implements OnInit {
       this.pacienteEscolhido.medicamentos.push(cadastroMedicamento);
       const pacienteMedicado = this.pacienteEscolhido;
 
+      
       const newArray = this.listaPacientes.map((obj: any) => {
         if (obj.id === pacienteMedicado.id) {
           return pacienteMedicado;
@@ -171,6 +167,7 @@ export class DrugRegistrationComponent implements OnInit {
       console.log(this.storage.getStorage('pacientes'));
 
       this.formulario.reset('');
+      location.reload()
     }
   }
   listarPacientes(array: any[] = this.listaPacientes) {

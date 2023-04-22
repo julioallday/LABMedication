@@ -17,7 +17,7 @@ export class PacienteService {
     return this.pacientes;
   }
 
-  getPaciente(id: number) {
+  getPaciente(id: string) {
     return this.pacientes.find((paciente) => paciente.id === id);
   }
 
@@ -34,20 +34,26 @@ export class PacienteService {
   }
 
   adicionarPaciente(paciente: any) {
+
     this.pacientes.push(paciente);
+    this.storage.setStorage("pacientes", this.pacientes)
   }
 
-  atualizarPaciente(id: number, paciente: any) {
+  atualizarPaciente(id: string, paciente: any) {
     const index = this.pacientes.findIndex((p) => p.id === id);
     if (index !== -1) {
       this.pacientes[index] = paciente;
-    }
+      this.storage.setStorage("pacientes", this.pacientes)
+      return true;
+    } return false;
   }
 
-  excluirPaciente(id: number) {
+  excluirPaciente(id: string) {
     const index = this.pacientes.findIndex((p) => p.id === id);
     if (index !== -1) {
       this.pacientes.splice(index, 1);
-    }
+      this.storage.setStorage("pacientes", this.pacientes)
+      return true;
+    } return false;
   }
 }

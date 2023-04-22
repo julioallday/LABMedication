@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { Endereco } from '../shared/models/Endereco.model';
 import { v4 as uuidv4 } from 'uuid';
 import { ActivatedRoute } from '@angular/router';
+import { PacienteService } from '../shared/services/paciente.service';
 
 @Component({
   selector: 'app-patient-registration',
@@ -14,6 +15,8 @@ import { ActivatedRoute } from '@angular/router';
 export class PatientRegistrationComponent {
 
   formulario: FormGroup;
+  botaoEditar = false
+  botaoCadastrar = true;
   generos = ['Masculino', 'Feminino', 'Outro'];
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
   pacientes: any = [];
@@ -24,6 +27,7 @@ export class PatientRegistrationComponent {
     private cep: CepService,
     private storage: LocalStorageService,
     private router: ActivatedRoute,
+    private pacienteService: PacienteService
   ) {
      this.storage.getStorage('pacientes')
        ? (this.pacientes = this.storage.getStorage('pacientes'))
@@ -99,6 +103,8 @@ export class PatientRegistrationComponent {
         this.formulario.get('complemento')?.setValue(paciente.complemento)
         this.formulario.get('bairro')?.setValue(paciente.bairro)
         this.formulario.get('pontoReferencia')?.setValue(paciente.pontoReferencia)
+        this.botaoEditar = !this.botaoEditar
+        this.botaoCadastrar = !this.botaoCadastrar
       }
       })
   }
@@ -122,12 +128,37 @@ export class PatientRegistrationComponent {
         ...this.formulario.value,
         medicamentos: [],
       };
-      this.pacientes.push(cadastroPaciente);
-      this.storage.setStorage('pacientes', this.pacientes);
-      console.log(this.storage.getStorage('pacientes'));
+      this.pacienteService.adicionarPaciente(cadastroPaciente)
       this.formulario.reset('');
+      location.reload()
     }
   }
+  editar() {
+    this.router.params.subscribe((params: any) => {
+      const paciente = {
+        ...this.formulario.value,
+        id: params.id,
+         medicamentos: [],
+      }
+      console.log(paciente);
+      const resposta = this.pacienteService.atualizarPaciente(params.id, paciente)
+      if (resposta) {
+        alert(`Paciente ${paciente.nomeCompleto} editado com sucesso`)
+      }
+     })
+    }
+  excluir() {
+    this.router.params.subscribe((params: any) => {
+      const resposta = this.pacienteService.excluirPaciente(params.id)
+      if (resposta) {
+        alert(`Paciente deletado com sucesso`)
+      } else {
+        alert("Falha ao deletar o paciente escolhido, tente novamente")
+      }
+     })
+    }
+    
+  
   buscarCep() {
     const cepControl = this.formulario.get('cep')!;
     const cepValue = cepControl.value;

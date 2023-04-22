@@ -1,5 +1,10 @@
+<p-button label="Cadastrar" [disabled]="!botaoCadastrar" (click)="enviar()"></p-button>
 
-<form [formGroup]="formulario" (ngSubmit)="enviar()" class="row gap-3">
+<p-button label="Editar"[disabled]="!botaoEditar" (click)="editar()"></p-button>
+
+<p-button label="Deletar"[disabled]="!botaoEditar" (click)="excluir()"></p-button>
+
+<form [formGroup]="formulario" class="row gap-3">
     <label for="nomeCompleto">Nome Completo</label>
     <input class=" w-full" type="text" id="nomeCompleto" formControlName="nomeCompleto" />
 
@@ -79,7 +84,6 @@
 
     <label for="pontoReferencia">Ponto de Referência</label>
     <input type="text" id="pontoReferencia" formControlName="pontoReferencia" />
-
-    <p-button  label="Enviar" type="submit"></p-button>
-
+ 
+ 
 </form>

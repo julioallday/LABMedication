@@ -1,8 +1,7 @@
 
 <label for="paciente">Buscar paciente</label>
-<input (input)="buscaPacientePeloNome()" (click)="listarPacientes()" [(ngModel)]="paciente.nome" d="paciente"
+<input (input)="buscaPacientePeloNome()" (click)="listarPacientes()" [(ngModel)]="paciente.nome" id="paciente"
     type="text">
-
 <br>
 <div class="dropdown">
     <div class="dropdown-content" *ngIf="!showForm">

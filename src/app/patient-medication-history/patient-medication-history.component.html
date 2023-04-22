@@ -5,14 +5,8 @@
             <h5 class="card-title">{{ paciente.nomeCompleto }}</h5>
             <p class="card-text">Convênio: {{ paciente.convenio }}</p>
             <p class="card-text">Contato de emergência: {{ paciente.contatoEmergencia }}</p>
-            <p class="card-text">Alergias:</p>
-            <ul>
-                <li *ngFor="let alergia of paciente.alergias">{{ alergia }}</li>
-            </ul>
-            <p class="card-text">Cuidados específicos:</p>
-            <ul>
-                <li *ngFor="let cuidado of paciente.cuidadosEspecificos">{{ cuidado }}</li>
-            </ul>
+            <p class="card-text">Alergias: {{ paciente.alergias }}</p>
+            <p class="card-text">Cuidados específicos: {{ paciente.cuidadosEspecificos }}</p>
         </div>
     </div>
 
@@ -23,7 +17,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Data e hora</th>
-                <th>Editar/Deletar</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -31,12 +25,11 @@
                 <td>{{ medicacao.nomeMedicamento }}</td>
                 <td>{{ medicacao.data | date: 'dd/MM/yyyy' }} | {{medicacao.horario}}</td>
                 <td>
-                    <button class="btn btn-primary" (click)="editarMedicacao(medicacao)">Editar</button>
-                    <button class="btn btn-danger" (click)="deletarMedicacao(medicacao)">Deletar</button>
+                    <button class="btn btn-primary">Editar</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <button class="btn btn-primary" (click)="cadastrarMedicacao()">Cadastrar medicação</button> -->
+   <a [routerLink]="['../../../cadastro-medicamentos']"><button class="btn btn-primary">Cadastrar medicação</button></a> 
  </div>

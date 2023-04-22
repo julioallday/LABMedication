@@ -28,7 +28,5 @@ export class PatientMedicationHistoryComponent {
       this.historico = this.paciente.medicamentos;
     });
   }
-  editarMedicacao(medicacao: any) {}
-  deletarMedicacao(medicacao: any) {}
-  cadastrarMedicacao() {}
+  
 }

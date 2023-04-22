@@ -42,6 +42,12 @@ const routes: Routes = [
     canActivate: [AccessGuard],
     data: { title: 'Cadastro de Medicamento' },
   },
+  {
+    path: 'cadastro-medicamentos/:id',
+    component: DrugRegistrationComponent,
+    canActivate: [AccessGuard],
+    data: { title: 'Cadastro de Medicamento' },
+  },
   { path: '**', redirectTo: 'home' },
 ];
 

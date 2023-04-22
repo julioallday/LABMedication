@@ -3,6 +3,8 @@ import { MedicationHistoryListingComponent } from './medication-history-listing.
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { PatientRegistrationComponent } from '../patient-registration/patient-registration.component';
+import { DrugRegistrationComponent } from '../drug-registration/drug-registration.component';
 
 const routes: Routes = [
   {
@@ -13,6 +15,11 @@ const routes: Routes = [
     path: 'detalhes-paciente/:id',
     component: PatientMedicationHistoryComponent,
     data: { title: 'Histórico de Medicação de Paciente' },
+  },
+  {
+    path: 'home/cadastro-medicamentos/:id',
+    component: DrugRegistrationComponent,
+    data: { title: 'Cadastro de Medicamentos' },
   },
 ];
 

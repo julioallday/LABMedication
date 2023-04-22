@@ -1,6 +1,6 @@
-import { PacienteService } from './../paciente.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { PacienteService } from '../shared/services/paciente.service';
 
 @Component({
   selector: 'app-home',

@@ -1,9 +1,10 @@
 import { LocalStorageService } from './../shared/services/local-storage.service';
 import { CepService } from './../shared/services/cep.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AsyncValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Endereco } from '../shared/models/Endereco.model';
 import { v4 as uuidv4 } from 'uuid';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patient-registration',
@@ -16,15 +17,19 @@ export class PatientRegistrationComponent {
   generos = ['Masculino', 'Feminino', 'Outro'];
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
   pacientes: any = [];
+  url!:string
 
   constructor(
     private fb: FormBuilder,
     private cep: CepService,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private router: ActivatedRoute,
   ) {
      this.storage.getStorage('pacientes')
        ? (this.pacientes = this.storage.getStorage('pacientes'))
        : [];
+
+   
     this.formulario = this.fb.group({
       nomeCompleto: [
         '',
@@ -37,7 +42,7 @@ export class PatientRegistrationComponent {
       genero: ['', Validators.required],
       dataNascimento: ['', Validators.required],
       cpf: ['', [Validators.required]],
-      rgOrgaoExpedidor: ['', Validators.required, Validators.maxLength(20)],
+      rgOrgaoExpedidor: ['',  [Validators.required, Validators.maxLength(20)]],
       estadoCivil: ['', Validators.required],
       telefone: ['', [Validators.required]],
       email: ['', Validators.email],
@@ -64,6 +69,38 @@ export class PatientRegistrationComponent {
       bairro: [''],
       pontoReferencia: [''],
     });
+    
+    router.params.subscribe((params: any) => {
+     const paciente = this.pacientes.find((el: any) => {
+       return el.id === params.id
+     })
+      console.log(paciente);
+      if (params) {
+        this.formulario.get('nomeCompleto')?.setValue(paciente.nomeCompleto)
+        this.formulario.get('genero')?.setValue(paciente.genero)
+        this.formulario.get('dataNascimento')?.setValue(paciente.dataNascimento)
+        this.formulario.get('cpf')?.setValue(paciente.cpf)
+        this.formulario.get('rgOrgaoExpedidor')?.setValue(paciente.rgOrgaoExpedidor)
+        this.formulario.get('estadoCivil')?.setValue(paciente.estadoCivil)
+        this.formulario.get('telefone')?.setValue(paciente.telefone)
+        this.formulario.get('email')?.setValue(paciente.email)
+        this.formulario.get('naturalidade')?.setValue(paciente.naturalidade)
+        this.formulario.get('contatoEmergencia')?.setValue(paciente.contatoEmergencia)
+        this.formulario.get('alergias')?.setValue(paciente.alergias)
+        this.formulario.get('cuidadosEspecificos')?.setValue(paciente.cuidadosEspecificos)
+        this.formulario.get('convenio')?.setValue(paciente.convenio)
+        this.formulario.get('numeroConvenio')?.setValue(paciente.numeroConvenio)
+        this.formulario.get('validadeConvenio')?.setValue(paciente.validadeConvenio)
+        this.formulario.get('cep')?.setValue(paciente.cep)
+        this.formulario.get('cidade')?.setValue(paciente.cidade)
+        this.formulario.get('estado')?.setValue(paciente.estado)
+        this.formulario.get('logradouro')?.setValue(paciente.logradouro)
+        this.formulario.get('numero')?.setValue(paciente.numero)
+        this.formulario.get('complemento')?.setValue(paciente.complemento)
+        this.formulario.get('bairro')?.setValue(paciente.bairro)
+        this.formulario.get('pontoReferencia')?.setValue(paciente.pontoReferencia)
+      }
+      })
   }
 
   enviar() {

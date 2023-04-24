@@ -23,7 +23,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { MenuLateralComponent } from './shared/components/menu-lateral/menu-lateral.component';
 import { SidebarModule } from 'primeng/sidebar';
-import { LoadingSpinnerComponent } from './shared/componeents/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 

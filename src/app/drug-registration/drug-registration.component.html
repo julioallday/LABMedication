@@ -7,101 +7,114 @@
         <a *ngFor="let resultado of resultadosDaBusca" (click)="createForm(resultado)"
             class="dropdown-item">{{resultado.nomeCompleto}}</a>
     </div>
-    <div *ngIf="showForm">
-        <div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary mr-2" (click)="cadastrar()"
-                [disabled]="botaoCadastrar && formulario.invalid"
-                >
+</div>
+<div *ngIf="showForm">
+    <div>
+        <div class="form-group">
+            <button  data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" class="btn btn-primary mr-2" (click)="cadastrar()"
+                [disabled]="botaoCadastrar && formulario.invalid">
                 Cadastrar
-                </button>
-                <button type="button" class="btn btn-secondary mr-2" (click)="editar()"
-                    [disabled]="!botaoEditar">
-                    Editar
-                </button>
-                <button type="button" class="btn btn-secondary" (click)="excluir()"
-                 [disabled]="!botaoEditar"
-                >
-                    Deletar
-                </button>
+            </button>
+            <button type="button" class="btn btn-secondary mr-2" (click)="editar()" [disabled]="!botaoEditar">
+                Editar
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="excluir()" [disabled]="!botaoEditar">
+                Deletar
+            </button>
+        </div>
+        <form [formGroup]="formulario">
+            <div>
+                Nome do paciente:{{pacienteEscolhido.nomeCompleto}}
             </div>
-            <form [formGroup]="formulario">
-                <div>
-                    Nome do paciente:{{pacienteEscolhido.nomeCompleto}}
-                </div>
-                <div class="form-group">
-                    <label for="nomeMedicamento">Nome do medicamento</label>
-                    <input type="text" class="form-control" id="nomeMedicamento" formControlName="nomeMedicamento">
-                    <div
-                        *ngIf="formulario.get('nomeMedicamento')?.invalid && (formulario.get('nomeMedicamento')?.dirty || formulario.get('nomeMedicamento')?.touched)">
-                        <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['required']">Campo obrigatório</div>
-                        <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['minlength']">Mínimo de 8 caracteres
-                        </div>
-                        <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['maxlength']">Máximo de 80 caracteres
-                        </div>
+            <div class="form-group">
+                <label for="nomeMedicamento">Nome do medicamento</label>
+                <input type="text" class="form-control" id="nomeMedicamento" formControlName="nomeMedicamento">
+                <div class="text-danger"
+                    *ngIf="formulario.get('nomeMedicamento')?.invalid && (formulario.get('nomeMedicamento')?.dirty || formulario.get('nomeMedicamento')?.touched)">
+                    <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['required']">*Campo obrigatório</div>
+                    <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['minlength']">*Mínimo de 8 caracteres
+                    </div>
+                    <div *ngIf="formulario.get('nomeMedicamento')?.errors?.['maxlength']">*Máximo de 80 caracteres
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="data">Data</label>
-                    <input type="date" class="form-control" id="data" formControlName="data">
-                    <div
-                        *ngIf="formulario.get('data')?.invalid && (formulario.get('data')?.dirty || formulario.get('data')?.touched)">
-                        Campo obrigatório</div>
-                </div>
-                <div class="form-group">
-                    <label for="horario">Horário</label>
-                    <input type="time" class="form-control" id="horario" formControlName="horario">
-                    <div
-                        *ngIf="formulario.get('horario')?.invalid && (formulario.get('horario')?.dirty || formulario.get('horario')?.touched)">
-                        Campo obrigatório</div>
-                </div>
-                <div class="form-group">
-                    <label for="tipo">Tipo de medicamento</label>
-                    <select class="form-control" id="tipo" formControlName="tipo">
-                        <option *ngFor="let tipo of tiposMedicamento" [value]="tipo">{{tipo}}</option>
-                    </select>
+            </div>
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="date" class="form-control" id="data" formControlName="data">
+                <div class="text-danger"
+                    *ngIf="formulario.get('data')?.invalid && (formulario.get('data')?.dirty || formulario.get('data')?.touched)">
+                    *Campo obrigatório</div>
+            </div>
+            <div class="form-group">
+                <label for="horario">Horário</label>
+                <input type="time" class="form-control" id="horario" formControlName="horario">
+                <div class="text-danger"
+                    *ngIf="formulario.get('horario')?.invalid && (formulario.get('horario')?.dirty || formulario.get('horario')?.touched)">
+                    *Campo obrigatório</div>
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo de medicamento</label>
+                <select class="form-control" id="tipo" formControlName="tipo">
+                    <option *ngFor="let tipo of tiposMedicamento" [value]="tipo">{{tipo}}</option>
+                </select>
 
-                    <div
-                        *ngIf="formulario.get('tipo')?.invalid && (formulario.get('tipo')?.dirty || formulario.get('tipo')?.touched)">
-                        Campo obrigatório</div>
+                <div class="text-danger"
+                    *ngIf="formulario.get('tipo')?.invalid && (formulario.get('tipo')?.dirty || formulario.get('tipo')?.touched)">
+                    *Campo obrigatório</div>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
+                <div class="text-danger"
+                    *ngIf="formulario.get('quantidade')?.invalid && (formulario.get('quantidade')?.dirty || formulario.get('quantidade')?.touched)">
+                    <div *ngIf="formulario.get('quantidade')?.errors?.['required']">*Campo obrigatório</div>
+                    <div *ngIf="formulario.get('quantidade')?.errors?.['pattern']">*Formato inválido. Use o formato
+                        xx.xx
+                    </div>
+                    <div *ngIf="formulario.get('quantidade')?.errors?.['min']">*Valor mínimo é 0.01</div>
                 </div>
-                <div class="form-group">
-                    <label for="quantidade">Quantidade</label>
-                    <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
-                    <div
-                        *ngIf="formulario.get('quantidade')?.invalid && (formulario.get('quantidade')?.dirty || formulario.get('quantidade')?.touched)">
-                        <div *ngIf="formulario.get('quantidade')?.errors?.['required']">Campo obrigatório</div>
-                        <div *ngIf="formulario.get('quantidade')?.errors?.['pattern']">Formato inválido. Use o formato
-                            xx.xx
-                        </div>
-                        <div *ngIf="formulario.get('quantidade')?.errors?.['min']">Valor mínimo é 0.01</div>
+            </div>
+            <div class="form-group">
+                <label for="unidade">Unidade:</label>
+                <select id="unidade" class="form-control" formControlName="unidade">
+                    <option *ngFor="let unidade of unidades" [value]="unidade">{{unidade}}</option>
+                </select>
+            </div>
+            <div class="text-danger"
+                *ngIf="formulario.get('unidade')?.invalid && (formulario.get('unidade')?.dirty || formulario.get('unidade')?.touched)">
+                <div class="text-danger" *ngIf="formulario.get('unidade')?.errors?.['required']">*Campo obrigatório
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" class="form-control" formControlName="observacoes"></textarea>
+                <div class="text-danger"
+                    *ngIf="formulario.get('observacoes')?.invalid && (formulario.get('observacoes')?.dirty || formulario.get('observacoes')?.touched)">
+                    <div *ngIf="formulario.get('observacoes')?.errors?.['required']">
+                        *Observações são obrigatórias
+                    </div>
+                    <div *ngIf="formulario.get('observacoes')?.errors?.['minlength']">
+                        *Observações devem ter pelo menos 8 caracteres
+                    </div>
+                    <div *ngIf="formulario.get('observacoes')?.errors?.['maxlength']">
+                        *Observações devem ter no máximo 8000 caracteres
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="unidade">Unidade:</label>
-                    <select id="unidade" class="form-control" formControlName="unidade">
-                        <option *ngFor="let unidade of unidades" [value]="unidade">{{unidade}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="observacoes">Observações:</label>
-                    <textarea id="observacoes" class="form-control" formControlName="observacoes"></textarea>
-                    <div
-                        *ngIf="formulario.get('observacoes')?.invalid && (formulario.get('observacoes')?.dirty || formulario.get('observacoes')?.touched)">
-                        <div *ngIf="formulario.get('observacoes')?.errors?.['required']">
-                            Observações são obrigatórias
-                        </div>
-                        <div *ngIf="formulario.get('observacoes')?.errors?.['minlength']">
-                            Observações devem ter pelo menos 8 caracteres
-                        </div>
-                        <div *ngIf="formulario.get('observacoes')?.errors?.['maxlength']">
-                            Observações devem ter no máximo 8000 caracteres
-                        </div>
-                    </div>
-                </div>
-
-
-            </form>
+            </div>
+        </form>
+    </div>
+</div><div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastro bem sucedido!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Parabéns! Seu cadastro foi concluído com sucesso!
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
     </div>
+</div>

@@ -16,36 +16,35 @@ export class HomeComponent implements OnInit {
 
   searchOption = 'nomeCompleto';
   searchValue!: string;
+  carregando = true;
 
-  constructor(private pacienteService: PacienteService) {}
+
+
+  constructor(private pacienteService: PacienteService) { }
 
   ngOnInit() {
-    this.quantidadePacientes = this.pacienteService.getQuantidadePacientes();
-    this.quantidadeMedicamentos =
-      this.pacienteService.getQuantidadeMedicamentos();
-    this.pacientes = this.pacienteService.getPacientes();
-    this.listarPacientes()
+    this.carregarDados()
   }
   search() {
     if (this.searchValue == "") {
       this.listarPacientes()
     } else {
-        const filteredPatients = this.pacientes.filter((paciente: any) => {
-          if (
-            paciente[this.searchOption] !== null &&
-            paciente[this.searchOption] !== undefined
-          ) {
-            const termoPesquisadoMinusculo =
-              paciente[this.searchOption].toLowerCase();
-            return termoPesquisadoMinusculo.includes(
-              this.searchValue.toLowerCase()
-            );
-          }
-          return false;
-        });
+      const filteredPatients = this.pacientes.filter((paciente: any) => {
+        if (
+          paciente[this.searchOption] !== null &&
+          paciente[this.searchOption] !== undefined
+        ) {
+          const termoPesquisadoMinusculo =
+            paciente[this.searchOption].toLowerCase();
+          return termoPesquisadoMinusculo.includes(
+            this.searchValue.toLowerCase()
+          );
+        }
+        return false;
+      });
 
-        console.log(filteredPatients);
-        this.listarPacientes(filteredPatients);
+      console.log(filteredPatients);
+      this.listarPacientes(filteredPatients);
     }
   }
   verDetalhes(obj: any) {
@@ -54,4 +53,15 @@ export class HomeComponent implements OnInit {
   listarPacientes(array: any[] = this.pacientes) {
     this.resultadosDaBusca = array;
   }
+  carregarDados() {
+    setTimeout(() => {
+      this.quantidadePacientes = this.pacienteService.getQuantidadePacientes();
+      this.quantidadeMedicamentos =
+        this.pacienteService.getQuantidadeMedicamentos();
+      this.pacientes = this.pacienteService.getPacientes();
+      this.listarPacientes()
+      this.carregando = false;
+    }, 2000);
+  }
+
 }

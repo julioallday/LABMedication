@@ -20,8 +20,10 @@ export class PatientRegistrationComponent {
   generos = ['Masculino', 'Feminino', 'Outro'];
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
   pacientes: any = [];
-  url!:string
+  url!: string
 
+  birthdate!: Date;
+  age!: number;
   constructor(
     private fb: FormBuilder,
     private cep: CepService,
@@ -29,11 +31,11 @@ export class PatientRegistrationComponent {
     private router: ActivatedRoute,
     private pacienteService: PacienteService
   ) {
-     this.storage.getStorage('pacientes')
-       ? (this.pacientes = this.storage.getStorage('pacientes'))
-       : [];
+    this.storage.getStorage('pacientes')
+      ? (this.pacientes = this.storage.getStorage('pacientes'))
+      : [];
 
-   
+
     this.formulario = this.fb.group({
       nomeCompleto: [
         '',
@@ -46,7 +48,7 @@ export class PatientRegistrationComponent {
       genero: ['', Validators.required],
       dataNascimento: ['', Validators.required],
       cpf: ['', [Validators.required]],
-      rgOrgaoExpedidor: ['',  [Validators.required, Validators.maxLength(20)]],
+      rgOrgaoExpedidor: ['', [Validators.required, Validators.maxLength(20)]],
       estadoCivil: ['', Validators.required],
       telefone: ['', [Validators.required]],
       email: ['', Validators.email],
@@ -73,11 +75,11 @@ export class PatientRegistrationComponent {
       bairro: [''],
       pontoReferencia: [''],
     });
-    
+
     router.params.subscribe((params: any) => {
-     const paciente = this.pacientes.find((el: any) => {
-       return el.id === params.id
-     })
+      const paciente = this.pacientes.find((el: any) => {
+        return el.id === params.id
+      })
       console.log(paciente);
       if (params) {
         this.formulario.get('nomeCompleto')?.setValue(paciente.nomeCompleto)
@@ -106,7 +108,7 @@ export class PatientRegistrationComponent {
         this.botaoEditar = !this.botaoEditar
         this.botaoCadastrar = !this.botaoCadastrar
       }
-      })
+    })
   }
 
   enviar() {
@@ -123,11 +125,14 @@ export class PatientRegistrationComponent {
       }
       alert(JSON.stringify(controlesInvalidos));
     } else {
+      this.calculateAge(this.formulario.get('dataNascimento')?.value)
       const cadastroPaciente = {
         id: uuidv4(),
         ...this.formulario.value,
         medicamentos: [],
+        idade: this.age
       };
+
       this.pacienteService.adicionarPaciente(cadastroPaciente)
       this.formulario.reset('');
       location.reload()
@@ -138,15 +143,15 @@ export class PatientRegistrationComponent {
       const paciente = {
         ...this.formulario.value,
         id: params.id,
-         medicamentos: [],
+        medicamentos: [],
       }
       console.log(paciente);
       const resposta = this.pacienteService.atualizarPaciente(params.id, paciente)
       if (resposta) {
         alert(`Paciente ${paciente.nomeCompleto} editado com sucesso`)
       }
-     })
-    }
+    })
+  }
   excluir() {
     this.router.params.subscribe((params: any) => {
       const resposta = this.pacienteService.excluirPaciente(params.id)
@@ -155,10 +160,10 @@ export class PatientRegistrationComponent {
       } else {
         alert("Falha ao deletar o paciente escolhido, tente novamente")
       }
-     })
-    }
-    
-  
+    })
+  }
+
+
   buscarCep() {
     const cepControl = this.formulario.get('cep')!;
     const cepValue = cepControl.value;
@@ -176,5 +181,16 @@ export class PatientRegistrationComponent {
         });
       });
     }
+  }
+
+  calculateAge(dataNascimento: any): void {
+    const today = new Date();
+    const birthDate = new Date(dataNascimento);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    this.age = age;
   }
 }

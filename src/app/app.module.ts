@@ -23,6 +23,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { ToastModule } from 'primeng/toast';
 import { MenuLateralComponent } from './shared/components/menu-lateral/menu-lateral.component';
 import { SidebarModule } from 'primeng/sidebar';
+import { LoadingSpinnerComponent } from './shared/componeents/loading-spinner/loading-spinner.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { SidebarModule } from 'primeng/sidebar';
     LoginComponent,
     CadastroContaComponent,
     MenuLateralComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +55,9 @@ import { SidebarModule } from 'primeng/sidebar';
     InputMaskModule,
     ToastModule,
     SidebarModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -16,9 +16,6 @@ export class LoginComponent implements OnInit {
   users: any = [];
 
   title = 'login';
-
-  @Output() enviado = new EventEmitter<string>();
-
   constructor(
     private storage: LocalStorageService,
     private router: Router,

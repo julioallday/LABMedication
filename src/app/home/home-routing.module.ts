@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: 'cadastro-pacientes/:id',
     component: PatientRegistrationComponent,
+
+  },
+  {
+    path: 'home/cadastro-pacientes/:id',
+    component: PatientRegistrationComponent,
+    data: {
+      title: 'Cadastro de Paciente'
+    }
   },
 ];
 
@@ -18,4 +26,4 @@ const routes: Routes = [
   declarations: [],
   imports: [RouterModule.forChild(routes)],
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }

@@ -45,7 +45,9 @@ export class PacienteService {
       this.pacientes[index] = paciente;
       this.storage.setStorage("pacientes", this.pacientes)
       return true;
-    } return false;
+    } else {
+      return false;
+    } 
   }
 
   excluirPaciente(id: string) {

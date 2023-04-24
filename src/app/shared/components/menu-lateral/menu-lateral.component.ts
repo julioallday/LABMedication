@@ -43,6 +43,6 @@ export class MenuLateralComponent implements OnInit {
   logout() {
     setTimeout(() => {
       this.accesService.setLogOut();
-    }, 500);
+    }, 800);
   }
 }

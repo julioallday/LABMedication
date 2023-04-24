@@ -9,7 +9,7 @@
     <input class=" w-full" type="text" id="nomeCompleto" formControlName="nomeCompleto" />
 
     <label for="genero">Gênero</label>
-    <select class=" w-full" id="genero" formControlName="genero">
+    <select class=" w-full" id="genero" formControlName="genero"> 
         <option *ngFor="let genero of generos" [value]="genero">{{genero}}</option>
     </select>
 

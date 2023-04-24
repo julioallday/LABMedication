@@ -16,6 +16,8 @@ export class DrugRegistrationComponent implements OnInit {
   url!: string
 
   showForm = false;
+  botaoEditar = false;
+  botaoCadastrar = true;
 
   paciente = {
     nome: '',
@@ -116,7 +118,7 @@ export class DrugRegistrationComponent implements OnInit {
         return el.id === this.url
       })
       if (params) {
-           this.showForm = !this.showForm
+        this.showForm = !this.showForm
         this.pacienteEscolhido = paciente
         this.formulario.get('nomeMedicamento')?.patchValue(medicamento.nomeMedicamento);
         this.formulario.get('data')?.setValue(medicamento.data);
@@ -125,8 +127,47 @@ export class DrugRegistrationComponent implements OnInit {
         this.formulario.get('quantidade')?.setValue(medicamento.quantidade);
         this.formulario.get('unidade')?.setValue(medicamento.unidade);
         this.formulario.get('observacoes')?.setValue(medicamento.observacoes);
+
+        this.botaoEditar = !this.botaoEditar
+        this.botaoCadastrar = !this.botaoCadastrar
         }
     })
+  }
+
+  editar() {
+   const medicamento = this.pacienteEscolhido.medicamentos.find((medicamento: any) => {
+       return medicamento.id == this.url
+   })
+    console.log(medicamento);
+
+    const paciente = this.listaPacientes.find((p: any) => p.id === this.pacienteEscolhido.id);
+    console.log(paciente);
+    
+  if (!paciente) {
+    throw new Error('Paciente não encontrado');
+  }
+  const medicamentoIndex = paciente.medicamentos.findIndex((m: any) => m.id === medicamento.id);
+  if (medicamentoIndex === -1) {
+    throw new Error('Medicamento não encontrado');
+  }
+    const novoMedicamento = {
+      ...this.formulario.value,
+      id: this.url
+    }
+    paciente.medicamentos[medicamentoIndex] = novoMedicamento;
+    this.pacienteService.atualizarPaciente(paciente.id, paciente)
+    location.reload()
+    
+  }
+  excluir() {
+  const paciente = this.listaPacientes.find((p: any) => p.id === this.pacienteEscolhido.id );
+  if (!paciente) {
+    throw new Error('Paciente não encontrado');
+  }
+  paciente.medicamentos = paciente.medicamentos.filter((m: any) => m.id !== this.url);
+
+    this.pacienteService.atualizarPaciente(this.pacienteEscolhido.id, paciente)
+    location.reload()
   }
 
   messageError() {
@@ -142,13 +183,12 @@ export class DrugRegistrationComponent implements OnInit {
     }
     alert(JSON.stringify(controlesInvalidos));
   }
-  onSubmit(): void {
-    console.log(this.formulario.value);
-    
+  cadastrar(): void {
     if (this.formulario.invalid) {
       this.messageError();
     } else {
       const cadastroMedicamento = {
+        nomePaciente: this.pacienteEscolhido.nomeCompleto,
         id: uuidv4(),
         ...this.formulario.value,
       };
@@ -170,16 +210,19 @@ export class DrugRegistrationComponent implements OnInit {
       location.reload()
     }
   }
+
   listarPacientes(array: any[] = this.listaPacientes) {
     this.resultadosDaBusca = array;
   }
+
   buscaPacientePeloNome() {
     const pacientesEncontrados = this.pesquisarPaciente(
       this.listaPacientes,
       this.paciente.nome
     );
     this.listarPacientes(pacientesEncontrados);
-  }
+  } 
+
   pesquisarPaciente = (pacientes: any[], termo: string) => {
     return pacientes.filter((paciente: any) => {
       const nomeMinusculo = paciente.nomeCompleto.toLowerCase();
@@ -190,7 +233,6 @@ export class DrugRegistrationComponent implements OnInit {
   createForm(obj: any) {
     console.log(obj);
     this.pacienteEscolhido = obj;
-
     this.showForm = true;
   }
 }

@@ -46,4 +46,7 @@ export class LoginComponent implements OnInit {
       alert('Dados incorretos.');
     }
   }
+  esqueceuASenha() {
+    window.alert('Funcionalidade em construção..')
+  }
 }

@@ -9,7 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CadastroContaComponent {
   form = new FormGroup({
-    email: new FormControl('', [Validators.minLength(10), Validators.required]),
+    email: new FormControl('', [Validators.minLength(10), Validators.email, Validators.required]),
     password: new FormControl('', [
       Validators.minLength(10),
       Validators.required,

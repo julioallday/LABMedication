@@ -12,26 +12,38 @@
                         <input type="email" formControlName="email" class="form-control rounded-3" id="floatingInput"
                             placeholder="name@example.com">
                         <label for="floatingInput">Email</label>
+                        <div class="text-danger"
+                            *ngIf="form.get('email')?.invalid && form.get('email')?.touched || form.get('email')?.dirty">
+                            <div *ngIf="form.get('email')?.errors?.['required']">*Campo obrigatório.</div>
+                            <div *ngIf="form.get('email')?.errors?.['email']">
+                                Formato de e-mail inválido.
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-floating mb-3">
                         <input formControlName="password" type="password" class="form-control rounded-3"
                             id="floatingPassword" placeholder="Password">
                         <label for="floatingPassword">Senha</label>
-                        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
-                            A senha deve ter no mínimo 10 caracteres.
+                        <div class="text-danger" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+                            <div *ngIf="form.get('password')?.errors?.['minlength']">*A senha deve ter no mínimo
+                                10 caracteres.</div>
+                            <div *ngIf="form.get('password')?.errors?.['required']">*Campo obrigatório.</div>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input formControlName="confirmPassword" type="password" class="form-control rounded-3" id="floatingConfirmPassword"
-                            placeholder="Password">
+                        <input formControlName="confirmPassword" type="password" class="form-control rounded-3"
+                            id="floatingConfirmPassword" placeholder="Password">
                         <label for="floatingConfirmPassword">Confirme a senha</label>
                     </div>
-                    <div *ngIf="form.get('confirmPassword')?.value != form.get('password')?.value && form.get('confirmPassword')?.touched">
-                        As senhas precisam ser iguais
+                    <div class="text-danger"
+                        *ngIf="form.get('confirmPassword')?.value != form.get('password')?.value && form.get('confirmPassword')?.touched">
+                        *As senhas precisam ser iguais
                     </div>
-                    <button (click)="registerUser()"
-                        class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Cadastrar</button>
-                    <small class="text-muted">Ao clicar em cadastrar você está aceitando os termos de uso.</small>
+                    <button (click)="registerUser()" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+                        [disabled]="form.invalid" type="submit">Cadastrar</button>
+                    <small class="text-muted">Ao clicar em cadastrar você está aceitando os termos de
+                        uso.</small>
                     <hr class="my-4">
                 </form>
             </div>

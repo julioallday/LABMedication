@@ -1,27 +1,40 @@
-<h1>Histórico de Medicação</h1>
+<div class="mx-auto mt-5">
+    <h1 class="w-50 mx-auto text-center">Histórico de Medicação</h1>
 
-<!-- Barra de pesquisa -->
-<div class="search-bar">
-    <input (blur)="listarPacientes()"  [(ngModel)]="paciente.nome" type="text" placeholder="Pesquisar paciente...">
-    <button (click)="buscaPacientePeloNome()">Buscar</button>
+    <!-- Barra de pesquisa -->
+    <div class="search-bar w-50 mx-auto d-flex gap-2 justify-content-center align-items-center">
+        <input class="h-100" (blur)="listarPacientes()" [(ngModel)]="paciente.nome" type="text"
+            placeholder="Pesquisar paciente...">
+        <button (click)="buscaPacientePeloNome()">Buscar</button>
+    </div>
+
+    <!-- Listagem de pacientes cadastrados -->
+    <div id="listagem-pacientes" class="my-4 w-50 mx-auto gap-5">
+        <div class="mx-auto justify-content-center">
+            <div id="tabela" class="mx-auto" >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Registro</th>
+                            <th>Nome do Paciente</th>
+                            <th>Convênio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="" *ngFor="let paciente of resultadosDaBusca; let i = index">
+                            <td>0000000{{ i + 1 }}</td>
+                            <td>{{ paciente.nomeCompleto}}</td>
+                            <td>{{ paciente.convenio }}</td>
+                            <td><button [routerLink]="['detalhes-paciente', paciente.id]"
+                                    (click)="verDetalhes(paciente)">Detalhes</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
 </div>
-
-<!-- Listagem de pacientes cadastrados -->
-<table>
-    <thead>
-        <tr>
-            <th>Registro</th>
-            <th>Nome do Paciente</th>
-            <th>Convênio</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="m-2" *ngFor="let paciente of resultadosDaBusca; let i = index">
-            <td>0000000{{ i + 1 }}</td>
-            <td>{{ paciente.nomeCompleto}}</td>
-            <td>{{ paciente.convenio }}</td>
-            <td><button [routerLink]="['detalhes-paciente', paciente.id]" (click)="verDetalhes(paciente)">Detalhes</button></td>
-        </tr>
-    </tbody>
-</table>

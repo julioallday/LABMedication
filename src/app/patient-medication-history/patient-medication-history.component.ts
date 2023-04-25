@@ -25,7 +25,16 @@ export class PatientMedicationHistoryComponent {
         ? (this.listaPacientes = this.storage.getStorage('pacientes'))
         : [];
       this.paciente = this.listaPacientes.find((el: any) => el.id == id) || {};
-      this.historico = this.paciente.medicamentos;
+
+      const medicamentosEmOrdemCronologica = this.ordenarPorDataEHora(this.paciente.medicamentos)
+      this.historico = medicamentosEmOrdemCronologica;
+    });
+  }
+  ordenarPorDataEHora(medicamentos: any[]) {
+   return medicamentos.sort((a:any, b:any) => {
+      const dataA:any = new Date(a.data + ' ' + a.horario);
+      const dataB: any = new Date(b.data + ' ' + b.horario);
+      return dataB - dataA;
     });
   }
   

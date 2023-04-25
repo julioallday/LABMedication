@@ -3,5 +3,5 @@
     min-height: 80dvh;
 }
 #card-paciente{
-    min-height: 300px;
+    color: var(--text-color);
 }

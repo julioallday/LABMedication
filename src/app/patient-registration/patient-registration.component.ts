@@ -157,6 +157,7 @@ export class PatientRegistrationComponent {
       const resposta = this.pacienteService.excluirPaciente(params.id)
       if (resposta) {
         alert(`Paciente deletado com sucesso`)
+        this.formulario.reset()
       } else {
         alert("Falha ao deletar o paciente escolhido, tente novamente")
       }

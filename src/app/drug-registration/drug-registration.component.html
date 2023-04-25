@@ -6,25 +6,25 @@
             id="paciente" type="text">
     </span>
     <br>
-    <div id="dropdown" class="dropdown w-100">
-        <div class="dropdown-content mx-auto justify-content-center" *ngIf="!showForm">
-            <a *ngFor="let resultado of resultadosDaBusca" (click)="createForm(resultado)"
-                class="dropdown-item">{{resultado.nomeCompleto}}</a>
+    <div id="dropdown" class="dropdown col-12 col-md-8 ">
+        <div class="mx-auto">
+            <div class="dropdown-content justify-content-center " *ngIf="!showForm">
+                <a *ngFor="let resultado of resultadosDaBusca" (click)="createForm(resultado)"
+                    class="dropdown-item rounded">{{resultado.nomeCompleto}}</a>
+            </div>
+
         </div>
         <div *ngIf="showForm">
-            <div>
+            <div class="w-100">
                 <div class="form-group">
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit"
-                        class="btn btn-primary mr-2" (click)="cadastrar()"
-                        [disabled]="botaoCadastrar && formulario.invalid">
-                        Cadastrar
-                    </button>
-                    <button type="button" class="btn btn-secondary mr-2" (click)="editar()" [disabled]="!botaoEditar">
-                        Editar
-                    </button>
-                    <button type="button" class="btn btn-secondary" (click)="excluir()" [disabled]="!botaoEditar">
-                        Deletar
-                    </button>
+
+                    <p-button data-bs-toggle="modal" styleClass="mr-2" data-bs-target="#exampleModal" label="Cadastrar"
+                        (click)="cadastrar()" [disabled]="botaoCadastrar && formulario.invalid"></p-button>
+
+                    <p-button label="Editar" styleClass="p-button-raised p-button-secondary mr-2" (click)="editar()" [disabled]="!botaoEditar"></p-button>
+
+                    <p-button label="Deletar" styleClass="p-button-raised p-button-secondary mr-2" (click)="excluir()" [disabled]="!botaoEditar"></p-button>
+
                 </div>
                 <div class="w-100">
                     <form [formGroup]="formulario">
@@ -72,8 +72,12 @@
                                 *Campo obrigatório</div>
                         </div>
                         <div class="form-group">
-                            <label for="quantidade">Quantidade</label>
-                            <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
+                            <div class="flex-column">
+                                <label for="minmaxfraction">Quantidade</label>
+                                <br>
+                                <p-inputNumber formControlName="quantidade" inputId="minmaxfraction" mode="decimal"
+                                    [minFractionDigits]="2" [maxFractionDigits]="5"> </p-inputNumber>
+                            </div>
                             <div class="text-danger"
                                 *ngIf="formulario.get('quantidade')?.invalid && (formulario.get('quantidade')?.dirty || formulario.get('quantidade')?.touched)">
                                 <div *ngIf="formulario.get('quantidade')?.errors?.['required']">*Campo obrigatório</div>

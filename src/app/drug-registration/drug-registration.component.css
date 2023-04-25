@@ -1,8 +1,7 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  min-height: 400px;
-  min-width: 100vh;
+
 }
 
 .dropdown-content {

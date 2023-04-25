@@ -37,10 +37,11 @@ export class DrugRegistrationComponent implements OnInit {
   unidades = ['mg', 'mcg', 'g', 'mL', '%'];
 
   listaPacientes: any = [];
-
+ 
   pacienteEscolhido: any = {};
 
   resultadosDaBusca: any = [];
+  nomesDePacientes: any = [];
 
   constructor(private fb: FormBuilder, private storage: LocalStorageService, private router: ActivatedRoute, private pacienteService: PacienteService) {
     this.storage.getStorage('pacientes')
@@ -213,6 +214,7 @@ export class DrugRegistrationComponent implements OnInit {
 
   listarPacientes(array: any[] = this.listaPacientes) {
     this.resultadosDaBusca = array;
+    this.nomesDePacientes = this.resultadosDaBusca.map((el:any)=> el.nomeCompleto)
   }
 
   buscaPacientePeloNome() {

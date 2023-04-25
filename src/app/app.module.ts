@@ -26,7 +26,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AvatarModule } from 'primeng/avatar';
-
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { AvatarModule } from 'primeng/avatar';
     ToastModule,
     SidebarModule,
     ProgressSpinnerModule,
-    AvatarModule
+    AvatarModule,
+    InputNumberModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent],

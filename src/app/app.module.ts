@@ -25,6 +25,7 @@ import { MenuLateralComponent } from './shared/components/menu-lateral/menu-late
 import { SidebarModule } from 'primeng/sidebar';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AvatarModule } from 'primeng/avatar';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputMaskModule,
     ToastModule,
     SidebarModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,25 +1,31 @@
 <div *ngIf="sidebarVisible">
     <nav class="navbar navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
-                LABMedication
-            </button>
+
+            <p-button label="LABMedication" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"></p-button>
             <span class="navbar-brand">{{titulo}}</span>
             <div class="d-flex">
-                <span class="navbar-text me-2">{{usuario}}</span>
-              <a style="color: aliceblue;" [routerLink]="['login']" (click)="logout()">Sair</a>
+                <div id="usuario">
+                    <p-avatar
+                        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmz5QpYl8-SkJ_LWsz3rpvHi-f_UVDG1xHYQ&usqp=CAU"
+                        styleClass="mr-2" size="large" shape="circle"></p-avatar>
+                </div>
+                <span id="email" class="navbar-text  me-2">{{usuario}}</span>
+               
             </div>
         </div>
     </nav>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
-        </div>
-        <div class="offcanvas-body">
-            <!-- Conteúdo do menu aqui -->
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+        </div>
+        <h5 class="offcanvas-title text-center" id="sidebarMenuLabel">Menu</h5>
+        <div class="offcanvas-body">
+
+            <!-- Conteúdo do menu aqui -->
             <div class="bg-light border-end" id="sidebar-wrapper">
-                <div class="list-group list-group-flush">
+                <div class="list-group list-group-flush fs-4">
                     <div class="sidebar-heading">Geral</div>
                     <a [routerLink]="['home']" routerLinkActive="active" class="list-group-item list-group-item-action">
                         <i class="fas fa-home"></i> Início
@@ -40,6 +46,7 @@
                     </a>
                 </div>
             </div>
+            <p-button label="Sair" [routerLink]="['login']" (click)="logout()" styleClass="p-button-danger mt-5 px-4"></p-button>
         </div>
     </div>
 </div>

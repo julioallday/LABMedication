@@ -7,7 +7,7 @@
 <div *ngIf="!carregando">
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card h-full">
                 <div class="card-body">
                     <h5 class="card-title">Estatísticas do Sistema</h5>
                     <p class="card-text">Quantidade de Pacientes: {{ quantidadePacientes }}</p>
@@ -43,14 +43,18 @@
     </div>
     <div class="row mt-2">
         <div class="col-md-4" *ngFor="let paciente of resultadosDaBusca">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ paciente.nomeCompleto }}</h5>
-                    <p class="card-text">{{ paciente.idade }} anos, {{ paciente.convenio || "sem convênio" }}</p>
-                    <a [routerLink]="['cadastro-pacientes', paciente.id]"><button class="btn btn-primary">Ver
-                            Mais</button></a>
+            <a class="text-decoration-none text-dark" [routerLink]="['cadastro-pacientes', paciente.id]">
+                <div class="card h-full">
+                    <div class="card-body d-flex flex-column text-center gap-3 justify-content-end">
+                        <p-avatar  label="LAB" styleClass="mx-auto" size="xlarge" shape="circle"></p-avatar>
+                        <h6 class="card-title">{{ paciente.nomeCompleto }}</h6>
+                        <p class="card-text">{{ paciente.idade }} anos, {{ paciente.convenio || "sem convênio" }}</p>
+                     
+                    </div>
+                    <span class="text-center">Ver
+                        Mais</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>

@@ -1,6 +1,8 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  min-height: 400px;
+  min-width: 100vh;
 }
 
 .dropdown-content {
@@ -22,8 +24,8 @@
 .dropdown-item:hover {
   background-color: #ddd;
 }
-.modal-content{
-    background-color: rgb(99, 225, 99);
-    color: white;
-    letter-spacing: 1px;
+.modal-content {
+  background-color: rgb(99, 225, 99);
+  color: white;
+  letter-spacing: 1px;
 }

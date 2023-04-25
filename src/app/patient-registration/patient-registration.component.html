@@ -1,168 +1,183 @@
-<p-button data-bs-toggle="modal" data-bs-target="#exampleModal" label="Cadastrar" [disabled]=" botaoCadastrar && formulario.invalid" (click)="enviar()"></p-button>
-
-<p-button label="Editar"[disabled]="!botaoEditar" (click)="editar()"></p-button>
-
-<p-button label="Deletar"[disabled]="!botaoEditar" (click)="excluir()"></p-button>
-
-<form [formGroup]="formulario" class="row gap-3">
-    <label for="nomeCompleto">Nome Completo</label>
-    <input class="w-full" type="text" id="nomeCompleto" formControlName="nomeCompleto" />
-    <div
-        *ngIf="formulario.get('nomeCompleto')?.invalid && (formulario.get('nomeCompleto')?.dirty || formulario.get('nomeCompleto')?.touched)">
-        <div class="text-red-500 text-sm">*Campo obrigatório</div>
-        <div class="text-red-500 text-sm" *ngIf="formulario.get('nomeCompleto')?.errors?.['minlength']">*Mínimo de 4 caracteres
-        </div>
-        <div class="text-red-500 text-sm" *ngIf="formulario.get('nomeCompleto')?.errors?.['maxlength']">*Máximo de 80 caracteres
-        </div>
+<div class="col-12 col-sm-8  col-lg-6 mx-auto">
+    <div class="botoes d-flex justify-content-end gap-sm-2">
+        <p-button data-bs-toggle="modal" data-bs-target="#exampleModal" styleClass="p-button-success" label="Cadastrar"
+            [disabled]=" botaoCadastrar && formulario.invalid" (click)="enviar()"></p-button>
+    
+        <p-button label="Editar" [disabled]="!botaoEditar" (click)="editar()"></p-button>
+    
+        <p-button label="Deletar" styleClass="p-button-danger" [disabled]="!botaoEditar" (click)="excluir()"></p-button>
     </div>
     
-    <label for="genero">Gênero</label>
-    <select class="w-full" id="genero" formControlName="genero">
-        <option value="" disabled selected hidden>Selecione</option>
-        <option *ngFor="let genero of generos" [value]="genero">{{genero}}</option>
-    </select>
-    <div *ngIf="formulario.get('genero')?.invalid && (formulario.get('genero')?.dirty || formulario.get('genero')?.touched)">
-        <div class="text-red-500 text-sm">*Campo obrigatório</div>
-    </div>
-    
-    <label for="dataNascimento">Data de Nascimento</label>
-    <input type="date" id="dataNascimento" formControlName="dataNascimento" />
-    <div
-        *ngIf="formulario.get('dataNascimento')?.invalid && (formulario.get('dataNascimento')?.dirty || formulario.get('dataNascimento')?.touched)">
-        <div class="text-red-500 text-sm">*Campo obrigatório</div>
-    </div>
-    
-    <label for="cpf">CPF</label>
-    <p-inputMask mask="999.999.999-99" id="cpf" formControlName="cpf" placeholder="999.999.999-99"></p-inputMask>
-    <div *ngIf="formulario.get('cpf')?.invalid && (formulario.get('cpf')?.dirty || formulario.get('cpf')?.touched)">
-        <div class="text-red-500 text-sm">*Campo obrigatório</div>
-    </div>
-
-<label for="rgOrgaoExpedidor">RG com órgão expedidor</label>
-<p-inputMask mask="99.999.999-9 aaaaaa" id="rgOrgaoExpedidor" formControlName="rgOrgaoExpedidor"
-    placeholder="xx.xxx.xxx-x orgão"></p-inputMask>
-<div *ngIf="formulario.get('rgOrgaoExpedidor')?.invalid && (formulario.get('rgOrgaoExpedidor')?.dirty || formulario.get('rgOrgaoExpedidor')?.touched)"
-    class="text-red-600">
-    <div *ngIf="formulario.get('rgOrgaoExpedidor')?.errors?.['required']">Campo obrigatório.</div>
-    <div *ngIf="formulario.get('rgOrgaoExpedidor')?.errors?.['maxLength']">O campo deve ter no máximo 20 caracteres.</div>
-</div>
-
-<label for="estadoCivil">Estado Civil</label>
-<select id="estadoCivil" formControlName="estadoCivil">
-    <option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil">{{estadoCivil}}</option>
-</select>
-<div *ngIf="formulario.get('estadoCivil')?.invalid && (formulario.get('estadoCivil')?.dirty || formulario.get('estadoCivil')?.touched)"
-    class="text-red-600">Campo obrigatório.</div>
-
-<label for="telefone">Telefone</label>
-<p-inputMask mask="(99)9 9999-9999" id="telefone" formControlName="telefone"
-    placeholder="(99)9 9999-9999"></p-inputMask>
-<div *ngIf="formulario.get('telefone')?.invalid && (formulario.get('telefone')?.dirty || formulario.get('telefone')?.touched)"
-    class="text-red-600">Campo obrigatório.</div>
-
-<label for="email">E-mail (opcional)</label>
-<input type="email" id="email" formControlName="email" />
-<div *ngIf="formulario.get('email')?.invalid && (formulario.get('email')?.dirty || formulario.get('email')?.touched)"
-    class="text-red-600">Formato de e-mail inválido.</div>
-
-<label for="naturalidade">Naturalidade</label>
-<input type="text" id="naturalidade" formControlName="naturalidade" />
-<div *ngIf="formulario.get('naturalidade')?.invalid && (formulario.get('naturalidade')?.dirty || formulario.get('naturalidade')?.touched)"
-    class="text-red-600">
-    <div *ngIf="formulario.get('naturalidade')?.errors?.['required']">Campo obrigatório.</div>
-    <div *ngIf="formulario.get('naturalidade')?.errors?.['minLength']">O campo deve ter no mínimo 5 caracteres.</div>
-    <div *ngIf="formulario.get('naturalidade')?.errors?.['maxLength']">O campo deve ter no máximo 100 caracteres.</div>
-</div>
-
-<label for="contatoEmergencia">Contato de Emergência</label>
-<p-inputMask mask="(99)9 9999-9999" id="contatoEmergencia" formControlName="contatoEmergencia"
-    placeholder="(99)9 9999-9999"></p-inputMask>
-<div *ngIf="formulario.get('contatoEmergencia')?.invalid && (formulario.get('contatoEmergencia')?.dirty || formulario.get('contatoEmergencia')?.touched)"
-    class="text-red-600">Campo obrigatório.</div>
-
-    <label for="alergias">Lista de Alergias (opcional)</label>
-    <input type="text" id="alergias" formControlName="alergias" />
-
-    <label for="cuidadosEspecificos">Lista de Cuidados Específicos (opcional)</label>
-    <input type="text" id="cuidadosEspecificos" formControlName="cuidadosEspecificos" />
-
-    <label for="convenio">Convênio (opcional)</label>
-    <input type="text" id="convenio" formControlName="convenio" />
-
-    <label for="numeroConvenio">Número do Convênio (opcional)</label>
-    <input type="text" id="numeroConvenio" formControlName="numeroConvenio" />
-
-    <label for="validadeConvenio">Validade do Convênio (opcional)</label>
-    <input type="date" id="validadeConvenio" formControlName="validadeConvenio" />
-
-<label>Endereço</label>
-<span class="p-float-label">
-    <p-inputMask type="text" (onBlur)="buscarCep()" mask="99999-999" formControlName="cep" id="cep"></p-inputMask>
-    <label htmlFor="cep">CEP</label>
-</span>
-<div *ngIf="formulario.get('cep')?.invalid && (formulario.get('cep')?.dirty || formulario.get('cep')?.touched)">
-    <div *ngIf="formulario.get('cep')?.errors?.['required']">
-        <small class="text-danger">Campo obrigatório</small>
-    </div>
-</div>
-
-<label for="cidade">Cidade</label>
-<input type="text" id="cidade" formControlName="cidade" />
-<div *ngIf="formulario.get('cidade')?.invalid && (formulario.get('cidade')?.dirty || formulario.get('cidade')?.touched)">
-    <div *ngIf="formulario.get('cidade')?.errors?.['required']">
-        <small class="text-danger">Campo obrigatório</small>
-    </div>
-</div>
-
-<label for="estado">Estado</label>
-<input type="text" id="estado" formControlName="estado" />
-<div *ngIf="formulario.get('estado')?.invalid && (formulario.get('estado')?.dirty || formulario.get('estado')?.touched)">
-    <div *ngIf="formulario.get('estado')?.errors?.['required']">
-        <small class="text-danger">Campo obrigatório</small>
-    </div>
-</div>
-
-<label for="logradouro">Logradouro</label>
-<input type="text" id="logradouro" formControlName="logradouro" />
-<div
-    *ngIf="formulario.get('logradouro')?.invalid && (formulario.get('logradouro')?.dirty || formulario.get('logradouro')?.touched)">
-    <div *ngIf="formulario.get('logradouro')?.errors?.['required']">
-        <small class="text-danger">Campo obrigatório</small>
-    </div>
-</div>
-
-<label for="numero">Número</label>
-<input type="text" id="numero" formControlName="numero" />
-<div *ngIf="formulario.get('numero')?.invalid && (formulario.get('numero')?.dirty || formulario.get('numero')?.touched)">
-    <div *ngIf="formulario.get('numero')?.errors?.['required']">
-        <small class="text-danger">Campo obrigatório</small>
-    </div>
-</div>
-
-<label for="complemento">Complemento</label>
-<input type="text" id="complemento" formControlName="complemento" />
-
-<label for="bairro">Bairro</label>
-<input type="text" id="bairro" formControlName="bairro" />
-<div *ngIf="formulario.get('bairro')?.invalid && (formulario.get('bairro')?.dirty || formulario.get('bairro')?.touched)">
-    <div *ngIf="formulario.get('bairro')?.errors?.['required']">
-        <small class="text-danger">Campo obrigatório</small>
-    </div>
-</div>
-
-</form>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastro bem sucedido!</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <form [formGroup]="formulario" class="row gap-3">
+        <label for="nomeCompleto">Nome Completo</label>
+        <input class="w-full" type="text" id="nomeCompleto" formControlName="nomeCompleto" />
+        <div
+            *ngIf="formulario.get('nomeCompleto')?.invalid && (formulario.get('nomeCompleto')?.dirty || formulario.get('nomeCompleto')?.touched)">
+            <div class="text-red-500 text-sm">*Campo obrigatório</div>
+            <div class="text-red-500 text-sm" *ngIf="formulario.get('nomeCompleto')?.errors?.['minlength']">*Mínimo de 4
+                caracteres
             </div>
-            <div class="modal-body">
-            Parabéns! Seu cadastro foi concluído com sucesso!
+            <div class="text-red-500 text-sm" *ngIf="formulario.get('nomeCompleto')?.errors?.['maxlength']">*Máximo de 80
+                caracteres
             </div>
-            <div class="modal-footer">
+        </div>
+    
+        <label for="genero">Gênero</label>
+        <select class="w-full" id="genero" formControlName="genero">
+            <option value="" disabled selected hidden>Selecione</option>
+            <option *ngFor="let genero of generos" [value]="genero">{{genero}}</option>
+        </select>
+        <div
+            *ngIf="formulario.get('genero')?.invalid && (formulario.get('genero')?.dirty || formulario.get('genero')?.touched)">
+            <div class="text-red-500 text-sm">*Campo obrigatório</div>
+        </div>
+    
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input type="date" id="dataNascimento" formControlName="dataNascimento" />
+        <div
+            *ngIf="formulario.get('dataNascimento')?.invalid && (formulario.get('dataNascimento')?.dirty || formulario.get('dataNascimento')?.touched)">
+            <div class="text-red-500 text-sm">*Campo obrigatório</div>
+        </div>
+    
+        <label for="cpf">CPF</label>
+        <p-inputMask mask="999.999.999-99" id="cpf" formControlName="cpf" placeholder="999.999.999-99"></p-inputMask>
+        <div *ngIf="formulario.get('cpf')?.invalid && (formulario.get('cpf')?.dirty || formulario.get('cpf')?.touched)">
+            <div class="text-red-500 text-sm">*Campo obrigatório</div>
+        </div>
+    
+        <label for="rgOrgaoExpedidor">RG com órgão expedidor</label>
+        <p-inputMask mask="99.999.999-9 aaaaaa" id="rgOrgaoExpedidor" formControlName="rgOrgaoExpedidor"
+            placeholder="xx.xxx.xxx-x orgão"></p-inputMask>
+        <div *ngIf="formulario.get('rgOrgaoExpedidor')?.invalid && (formulario.get('rgOrgaoExpedidor')?.dirty || formulario.get('rgOrgaoExpedidor')?.touched)"
+            class="text-red-600">
+            <div *ngIf="formulario.get('rgOrgaoExpedidor')?.errors?.['required']">Campo obrigatório.</div>
+            <div *ngIf="formulario.get('rgOrgaoExpedidor')?.errors?.['maxLength']">O campo deve ter no máximo 20 caracteres.
+            </div>
+        </div>
+    
+        <label for="estadoCivil">Estado Civil</label>
+        <select id="estadoCivil" formControlName="estadoCivil">
+            <option *ngFor="let estadoCivil of estadosCivis" [value]="estadoCivil">{{estadoCivil}}</option>
+        </select>
+        <div *ngIf="formulario.get('estadoCivil')?.invalid && (formulario.get('estadoCivil')?.dirty || formulario.get('estadoCivil')?.touched)"
+            class="text-red-600">Campo obrigatório.</div>
+    
+        <label for="telefone">Telefone</label>
+        <p-inputMask mask="(99)9 9999-9999" id="telefone" formControlName="telefone"
+            placeholder="(99)9 9999-9999"></p-inputMask>
+        <div *ngIf="formulario.get('telefone')?.invalid && (formulario.get('telefone')?.dirty || formulario.get('telefone')?.touched)"
+            class="text-red-600">Campo obrigatório.</div>
+    
+        <label for="email">E-mail (opcional)</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="formulario.get('email')?.invalid && (formulario.get('email')?.dirty || formulario.get('email')?.touched)"
+            class="text-red-600">Formato de e-mail inválido.</div>
+    
+        <label for="naturalidade">Naturalidade</label>
+        <input type="text" id="naturalidade" formControlName="naturalidade" />
+        <div *ngIf="formulario.get('naturalidade')?.invalid && (formulario.get('naturalidade')?.dirty || formulario.get('naturalidade')?.touched)"
+            class="text-red-600">
+            <div *ngIf="formulario.get('naturalidade')?.errors?.['required']">Campo obrigatório.</div>
+            <div *ngIf="formulario.get('naturalidade')?.errors?.['minLength']">O campo deve ter no mínimo 5 caracteres.
+            </div>
+            <div *ngIf="formulario.get('naturalidade')?.errors?.['maxLength']">O campo deve ter no máximo 100 caracteres.
+            </div>
+        </div>
+    
+        <label for="contatoEmergencia">Contato de Emergência</label>
+        <p-inputMask mask="(99)9 9999-9999" id="contatoEmergencia" formControlName="contatoEmergencia"
+            placeholder="(99)9 9999-9999"></p-inputMask>
+        <div *ngIf="formulario.get('contatoEmergencia')?.invalid && (formulario.get('contatoEmergencia')?.dirty || formulario.get('contatoEmergencia')?.touched)"
+            class="text-red-600">Campo obrigatório.</div>
+    
+        <label for="alergias">Lista de Alergias (opcional)</label>
+        <input type="text" id="alergias" formControlName="alergias" />
+    
+        <label for="cuidadosEspecificos">Lista de Cuidados Específicos (opcional)</label>
+        <input type="text" id="cuidadosEspecificos" formControlName="cuidadosEspecificos" />
+    
+        <label for="convenio">Convênio (opcional)</label>
+        <input type="text" id="convenio" formControlName="convenio" />
+    
+        <label for="numeroConvenio">Número do Convênio (opcional)</label>
+        <input type="text" id="numeroConvenio" formControlName="numeroConvenio" />
+    
+        <label for="validadeConvenio">Validade do Convênio (opcional)</label>
+        <input type="date" id="validadeConvenio" formControlName="validadeConvenio" />
+    
+        <label>Endereço</label>
+        <span class="p-float-label">
+            <p-inputMask type="text" (onBlur)="buscarCep()" mask="99999-999" formControlName="cep" id="cep"></p-inputMask>
+            <label htmlFor="cep">CEP</label>
+        </span>
+        <div *ngIf="formulario.get('cep')?.invalid && (formulario.get('cep')?.dirty || formulario.get('cep')?.touched)">
+            <div *ngIf="formulario.get('cep')?.errors?.['required']">
+                <small class="text-danger">Campo obrigatório</small>
+            </div>
+        </div>
+    
+        <label for="cidade">Cidade</label>
+        <input type="text" id="cidade" formControlName="cidade" />
+        <div
+            *ngIf="formulario.get('cidade')?.invalid && (formulario.get('cidade')?.dirty || formulario.get('cidade')?.touched)">
+            <div *ngIf="formulario.get('cidade')?.errors?.['required']">
+                <small class="text-danger">Campo obrigatório</small>
+            </div>
+        </div>
+    
+        <label for="estado">Estado</label>
+        <input type="text" id="estado" formControlName="estado" />
+        <div
+            *ngIf="formulario.get('estado')?.invalid && (formulario.get('estado')?.dirty || formulario.get('estado')?.touched)">
+            <div *ngIf="formulario.get('estado')?.errors?.['required']">
+                <small class="text-danger">Campo obrigatório</small>
+            </div>
+        </div>
+    
+        <label for="logradouro">Logradouro</label>
+        <input type="text" id="logradouro" formControlName="logradouro" />
+        <div
+            *ngIf="formulario.get('logradouro')?.invalid && (formulario.get('logradouro')?.dirty || formulario.get('logradouro')?.touched)">
+            <div *ngIf="formulario.get('logradouro')?.errors?.['required']">
+                <small class="text-danger">Campo obrigatório</small>
+            </div>
+        </div>
+    
+        <label for="numero">Número</label>
+        <input type="text" id="numero" formControlName="numero" />
+        <div
+            *ngIf="formulario.get('numero')?.invalid && (formulario.get('numero')?.dirty || formulario.get('numero')?.touched)">
+            <div *ngIf="formulario.get('numero')?.errors?.['required']">
+                <small class="text-danger">Campo obrigatório</small>
+            </div>
+        </div>
+    
+        <label for="complemento">Complemento</label>
+        <input type="text" id="complemento" formControlName="complemento" />
+    
+        <label for="bairro">Bairro</label>
+        <input type="text" id="bairro" formControlName="bairro" />
+        <div
+            *ngIf="formulario.get('bairro')?.invalid && (formulario.get('bairro')?.dirty || formulario.get('bairro')?.touched)">
+            <div *ngIf="formulario.get('bairro')?.errors?.['required']">
+                <small class="text-danger">Campo obrigatório</small>
+            </div>
+        </div>
+    
+    </form>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastro bem sucedido!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Parabéns! Seu cadastro foi concluído com sucesso!
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>

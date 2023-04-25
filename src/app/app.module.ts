@@ -28,6 +28,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AvatarModule } from 'primeng/avatar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { DividerModule } from 'primeng/divider';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ProgressSpinnerModule,
     AvatarModule,
     InputNumberModule,
-    DropdownModule
+    DropdownModule,
+    DividerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

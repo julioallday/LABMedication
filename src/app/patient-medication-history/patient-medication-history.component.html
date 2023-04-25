@@ -26,13 +26,15 @@
                 <td>{{ medicacao.nomeMedicamento }}</td>
                 <td>{{ medicacao.data | date: 'dd/MM/yyyy' }} | {{medicacao.horario}}</td>
                 <td>
-                    <a [routerLink]="['../../../cadastro-medicamentos', medicacao.id]"> <button
-                            class="btn btn-primary">Editar</button></a>
+                    <a [routerLink]="['../../../cadastro-medicamentos', medicacao.id]" class="text-decoration-none"><p-button label="Editar"
+                            styleClass="p-button-secondary"></p-button></a>
+
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <a [routerLink]="['../../../cadastro-medicamentos']"><button class="btn btn-primary">Cadastrar 
-            medicação</button></a>
+    <a [routerLink]="['../../../cadastro-medicamentos']"><p-button label="Cadastrar 
+                medicação" styleClass="p-button-link"></p-button></a>
+
 </div>

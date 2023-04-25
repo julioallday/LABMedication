@@ -17,18 +17,19 @@
             <div id="tabela" class="mx-auto">
                 <table>
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>Registro</th>
                             <th>Nome do Paciente</th>
                             <th>Convênio</th>
                             <th></th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <tr class="" *ngFor="let paciente of resultadosDaBusca; let i = index">
                             <td>0000000{{ i + 1 }}</td>
                             <td>{{ paciente.nomeCompleto}}</td>
-                            <td>{{ paciente.convenio }}</td>
+                            <td class="text-center">{{ paciente.convenio }}</td>
                             <td><p-button [routerLink]="['detalhes-paciente', paciente.id]"
                                     (click)="verDetalhes(paciente)" label="Detalhes"></p-button></td>
 

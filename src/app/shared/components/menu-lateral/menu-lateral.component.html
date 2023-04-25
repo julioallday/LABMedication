@@ -5,13 +5,14 @@
             <p-button label="LABMedication" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"></p-button>
             <span class="navbar-brand">{{titulo}}</span>
             <div class="d-flex">
+
+                <span id="email" class="navbar-text  me-2">{{usuario}}</span>
                 <div id="usuario">
                     <p-avatar
                         image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmz5QpYl8-SkJ_LWsz3rpvHi-f_UVDG1xHYQ&usqp=CAU"
                         styleClass="mr-2" size="large" shape="circle"></p-avatar>
                 </div>
-                <span id="email" class="navbar-text  me-2">{{usuario}}</span>
-               
+
             </div>
         </div>
     </nav>
@@ -46,7 +47,8 @@
                     </a>
                 </div>
             </div>
-            <p-button label="Sair" [routerLink]="['login']" (click)="logout()" styleClass="p-button-danger mt-5 px-4"></p-button>
+            <p-button label="Sair" [routerLink]="['login']" (click)="logout()"
+                styleClass="p-button-danger mt-5 px-4"></p-button>
         </div>
     </div>
 </div>

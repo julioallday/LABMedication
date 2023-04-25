@@ -3,15 +3,18 @@
 
     <!-- Barra de pesquisa -->
     <div class="search-bar w-50 mx-auto d-flex gap-2 justify-content-center align-items-center">
-        <input class="h-100" (blur)="listarPacientes()" [(ngModel)]="paciente.nome" type="text"
-            placeholder="Pesquisar paciente...">
-        <button (click)="buscaPacientePeloNome()">Buscar</button>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText placeholder="Pesquisar paciente..." (blur)="listarPacientes()"
+                [(ngModel)]="paciente.nome" />
+        </span>
+        <p-button (click)="buscaPacientePeloNome()" label="Buscar"></p-button>
     </div>
 
     <!-- Listagem de pacientes cadastrados -->
     <div id="listagem-pacientes" class="my-4 w-50 mx-auto gap-5">
         <div class="mx-auto justify-content-center">
-            <div id="tabela" class="mx-auto" >
+            <div id="tabela" class="mx-auto">
                 <table>
                     <thead>
                         <tr>
@@ -26,8 +29,9 @@
                             <td>0000000{{ i + 1 }}</td>
                             <td>{{ paciente.nomeCompleto}}</td>
                             <td>{{ paciente.convenio }}</td>
-                            <td><button [routerLink]="['detalhes-paciente', paciente.id]"
-                                    (click)="verDetalhes(paciente)">Detalhes</button></td>
+                            <td><p-button [routerLink]="['detalhes-paciente', paciente.id]"
+                                    (click)="verDetalhes(paciente)" label="Detalhes"></p-button></td>
+
                         </tr>
                     </tbody>
                 </table>

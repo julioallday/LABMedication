@@ -21,6 +21,7 @@ export class PatientRegistrationComponent {
   estadosCivis = ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'];
   pacientes: any = [];
   url!: string
+  paciente: any
 
   birthdate!: Date;
   age!: number;
@@ -77,34 +78,34 @@ export class PatientRegistrationComponent {
     });
 
     router.params.subscribe((params: any) => {
-      const paciente = this.pacientes.find((el: any) => {
+      this.paciente = this.pacientes.find((el: any) => {
         return el.id === params.id
       })
-      console.log(paciente);
+      console.log(this.paciente);
       if (params) {
-        this.formulario.get('nomeCompleto')?.setValue(paciente.nomeCompleto)
-        this.formulario.get('genero')?.setValue(paciente.genero)
-        this.formulario.get('dataNascimento')?.setValue(paciente.dataNascimento)
-        this.formulario.get('cpf')?.setValue(paciente.cpf)
-        this.formulario.get('rgOrgaoExpedidor')?.setValue(paciente.rgOrgaoExpedidor)
-        this.formulario.get('estadoCivil')?.setValue(paciente.estadoCivil)
-        this.formulario.get('telefone')?.setValue(paciente.telefone)
-        this.formulario.get('email')?.setValue(paciente.email)
-        this.formulario.get('naturalidade')?.setValue(paciente.naturalidade)
-        this.formulario.get('contatoEmergencia')?.setValue(paciente.contatoEmergencia)
-        this.formulario.get('alergias')?.setValue(paciente.alergias)
-        this.formulario.get('cuidadosEspecificos')?.setValue(paciente.cuidadosEspecificos)
-        this.formulario.get('convenio')?.setValue(paciente.convenio)
-        this.formulario.get('numeroConvenio')?.setValue(paciente.numeroConvenio)
-        this.formulario.get('validadeConvenio')?.setValue(paciente.validadeConvenio)
-        this.formulario.get('cep')?.setValue(paciente.cep)
-        this.formulario.get('cidade')?.setValue(paciente.cidade)
-        this.formulario.get('estado')?.setValue(paciente.estado)
-        this.formulario.get('logradouro')?.setValue(paciente.logradouro)
-        this.formulario.get('numero')?.setValue(paciente.numero)
-        this.formulario.get('complemento')?.setValue(paciente.complemento)
-        this.formulario.get('bairro')?.setValue(paciente.bairro)
-        this.formulario.get('pontoReferencia')?.setValue(paciente.pontoReferencia)
+        this.formulario.get('nomeCompleto')?.setValue(this.paciente.nomeCompleto)
+        this.formulario.get('genero')?.setValue(this.paciente.genero)
+        this.formulario.get('dataNascimento')?.setValue(this.paciente.dataNascimento)
+        this.formulario.get('cpf')?.setValue(this.paciente.cpf)
+        this.formulario.get('rgOrgaoExpedidor')?.setValue(this.paciente.rgOrgaoExpedidor)
+        this.formulario.get('estadoCivil')?.setValue(this.paciente.estadoCivil)
+        this.formulario.get('telefone')?.setValue(this.paciente.telefone)
+        this.formulario.get('email')?.setValue(this.paciente.email)
+        this.formulario.get('naturalidade')?.setValue(this.paciente.naturalidade)
+        this.formulario.get('contatoEmergencia')?.setValue(this.paciente.contatoEmergencia)
+        this.formulario.get('alergias')?.setValue(this.paciente.alergias)
+        this.formulario.get('cuidadosEspecificos')?.setValue(this.paciente.cuidadosEspecificos)
+        this.formulario.get('convenio')?.setValue(this.paciente.convenio)
+        this.formulario.get('numeroConvenio')?.setValue(this.paciente.numeroConvenio)
+        this.formulario.get('validadeConvenio')?.setValue(this.paciente.validadeConvenio)
+        this.formulario.get('cep')?.setValue(this.paciente.cep)
+        this.formulario.get('cidade')?.setValue(this.paciente.cidade)
+        this.formulario.get('estado')?.setValue(this.paciente.estado)
+        this.formulario.get('logradouro')?.setValue(this.paciente.logradouro)
+        this.formulario.get('numero')?.setValue(this.paciente.numero)
+        this.formulario.get('complemento')?.setValue(this.paciente.complemento)
+        this.formulario.get('bairro')?.setValue(this.paciente.bairro)
+        this.formulario.get('pontoReferencia')?.setValue(this.paciente.pontoReferencia)
         this.botaoEditar = !this.botaoEditar
         this.botaoCadastrar = !this.botaoCadastrar
       }
@@ -144,7 +145,7 @@ export class PatientRegistrationComponent {
       const paciente = {
         ...this.formulario.value,
         id: params.id,
-        medicamentos: [],
+        medicamentos: this.paciente.medicamentos,
         idade: this.age
       }
       console.log(paciente);

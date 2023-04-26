@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/60453269/220384874-f136b1f9-a852-4774-a600-7fab9d77e8a2.png" alt="Logo" width="300" height="200" />
+  <img src="https://user-images.githubusercontent.com/109560993/234654307-e0a53465-b625-472a-8304-7fa34ff3582b.png" alt="Logo" width="300" height="200" />
 </p>
 
 <h1 align="center"> ⭐ LABMedication </h1>
@@ -60,19 +60,26 @@
 <br />   
 
 
+
+
+
+
 ⭐ Login | ⭐ Cadastro | ⭐ Home | ⭐ Histórico |
 |---|---|---|---|
-![HomePagePhone](https://user-images.githubusercontent.com/60453269/216195912-079d82a0-0ab7-49faa71-414a60bf767.png) | ![DetalhesPhone](https://user-images.githubusercontent.com/60453269/216195909-5373005a-2e93-488f-959d-6196c76a4.png)| ![DetalhesPhone](https://user-imags.githubusercontent.com/60453269/216195906-bb69cd37-12bb-4deb-aa7f-bbe9c3873bef.png)| ![DetalhesPhone](https://user-images.githubusercontent.com/6045326/21695904-c6210dc9-2323-474b-8d70-8cda655f1ccc.png)
+![Screenshot_151](https://user-images.githubusercontent.com/109560993/234651539-8347f111-cf91-407a-8bb5-9e8d44f5e76e.png) | ![Screenshot_153](https://user-images.githubusercontent.com/109560993/234651907-f3b482a1-aca8-431f-aa75-c099f568bd1f.png) | ![Screenshot_152](https://user-images.githubusercontent.com/109560993/234651972-7f6d1d0e-aa8a-4878-8e75-ca139b6b593f.png) | ![Screenshot_154](https://user-images.githubusercontent.com/109560993/234652058-9f0006d8-432c-4ed6-b266-cca81a0dd7c0.png)
   
   
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 
+
 ### 💻 Desktop 
   
+
+
  ⭐ Login | ⭐ Cadastro | ⭐ Home |
 |---|---|---|
-![HomePage](https://user-images.githubuercontent.com/60453269/216196816-732e76cb-ad41-499f-80fd-2cfa04f52ad5.png) | ![Detalhes](https://usr-images.githubusercontent.com/60453269/216196824-69b5b6d2-cce1-4b08-9b03-ff5b5fcb8a12.png) | ![Detalhes](https://user-iages.githubusercontent.com/60453269/216196822-5008a618-bf21-4bb3-8c0e-579131d771fa.png)
+![Screenshot_155](https://user-images.githubusercontent.com/109560993/234653355-7f8bb80e-9f7c-447c-b0d1-3ae8a6d32e69.png) | ![Screenshot_156](https://user-images.githubusercontent.com/109560993/234653408-387729f3-8d21-4b5b-86b8-9d405752c393.png) | ![Screenshot_157](https://user-images.githubusercontent.com/109560993/234653489-5a0d0820-6554-4246-995f-9a663fffb635.png)
 
 
 <br/>
@@ -189,8 +196,14 @@ Para obter mais ajuda sobre o Angular CLI, use ng help ou consulte a página Ang
 ## 💡 Possíveis Melhorias
 <br />
 
-- [ ] ***- .*** 
-
+- [ ] ***- Adicionar novas estatísticas.*** 
+- [ ] ***- Migrar todos os inputs para a biblioteca primeNG.*** 
+- [ ] ***- Corrigir tamanhos de inputs.*** 
+- [ ] ***- Melhorar a usabilidade na página de cadastro de medicamentos.*** 
+- [ ] ***- Testar toda a aplicação.*** 
+- [ ] ***- Adicionar modo noturno.*** 
+- [ ] ***- Integração com backend para maior segurança de informações.*** 
+- [ ] ***- Entre outras..*** 
 
 <br /> 
 

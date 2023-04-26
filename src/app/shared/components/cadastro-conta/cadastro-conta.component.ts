@@ -33,20 +33,21 @@ export class CadastroContaComponent {
 
   registerUser() {
     if (this.form.valid) {
-     this.user = {
-       email: this.form.get('email') ? this.form.get('email')!.value : '',
-       password: this.form.get('password')
-         ? this.form.get('password')!.value
-         : '',
+      this.user = {
+        email: this.form.get('email') ? this.form.get('email')!.value : '',
+        password: this.form.get('password')
+          ? this.form.get('password')!.value
+          : '',
         isLoggedIn: false
-     };
+      };
       this.users.push(this.user);
-      
-     this.storage.setStorage('users', this.users);
-     this.form.get('email')?.reset('');
-     this.form.get('password')?.reset('');
-     this.form.get('confirmPassword')?.reset('');   
+
+      this.storage.setStorage('users', this.users);
+      this.form.reset()
+      alert("Cadastro efetuado com sucesso!")
+    } else {
+      alert("Cadastro inválido, tente novamente!")
     }
-   
+
   }
 }

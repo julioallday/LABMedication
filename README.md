@@ -62,7 +62,7 @@
 
 ⭐ Login | ⭐ Cadastro | ⭐ Home | ⭐ Histórico |
 |---|---|---|---|
-![HomePagePhone](https://user-images.githubusercontent.com/60453269/216195912-079d82a0-0ab7-49f3-aa71-414a60b2f767.png) | ![DetalhesPhone](https://user-images.githubusercontent.com/60453269/216195909-5373005a-2e93-488f-959d-619260fc76a4.png)| ![DetalhesPhone](https://user-images.githubusercontent.com/60453269/216195906-bb69cd37-12bb-4deb-aa7f-bbe9c3873bef.png)| ![DetalhesPhone](https://user-images.githubusercontent.com/60453269/216195904-c6210dc9-2323-474b-8d70-8cda655f1ccc.png)
+![HomePagePhone](https://user-images.githubusercontent.com/60453269/216195912-079d82a0-0ab7-49faa71-414a60bf767.png) | ![DetalhesPhone](https://user-images.githubusercontent.com/60453269/216195909-5373005a-2e93-488f-959d-6196c76a4.png)| ![DetalhesPhone](https://user-imags.githubusercontent.com/60453269/216195906-bb69cd37-12bb-4deb-aa7f-bbe9c3873bef.png)| ![DetalhesPhone](https://user-images.githubusercontent.com/6045326/21695904-c6210dc9-2323-474b-8d70-8cda655f1ccc.png)
   
   
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
@@ -70,9 +70,9 @@
 
 ### 💻 Desktop 
   
- ⭐ Login | ⭐ Registro | ⭐ Feed |
+ ⭐ Login | ⭐ Cadastro | ⭐ Home |
 |---|---|---|
-![HomePage](https://user-images.githubusercontent.com/60453269/216196816-732e76cb-ad41-499f-80fd-2cfa04f52ad5.png) | ![Detalhes](https://user-images.githubusercontent.com/60453269/216196824-69b5b6d2-cce1-4b08-9b03-ff5b5fcb8a12.png) | ![Detalhes](https://user-images.githubusercontent.com/60453269/216196822-5008a618-bf21-4bb3-8c0e-579131d771fa.png)
+![HomePage](https://user-images.githubuercontent.com/60453269/216196816-732e76cb-ad41-499f-80fd-2cfa04f52ad5.png) | ![Detalhes](https://usr-images.githubusercontent.com/60453269/216196824-69b5b6d2-cce1-4b08-9b03-ff5b5fcb8a12.png) | ![Detalhes](https://user-iages.githubusercontent.com/60453269/216196822-5008a618-bf21-4bb3-8c0e-579131d771fa.png)
 
 
 <br/>

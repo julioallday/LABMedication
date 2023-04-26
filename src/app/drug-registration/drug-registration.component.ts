@@ -139,17 +139,15 @@ export class DrugRegistrationComponent implements OnInit {
    const medicamento = this.pacienteEscolhido.medicamentos.find((medicamento: any) => {
        return medicamento.id == this.url
    })
-    console.log(medicamento);
-
     const paciente = this.listaPacientes.find((p: any) => p.id === this.pacienteEscolhido.id);
     console.log(paciente);
     
   if (!paciente) {
-    throw new Error('Paciente não encontrado');
+    alert('Paciente não encontrado');
   }
   const medicamentoIndex = paciente.medicamentos.findIndex((m: any) => m.id === medicamento.id);
   if (medicamentoIndex === -1) {
-    throw new Error('Medicamento não encontrado');
+    alert('Medicamento não encontrado');
   }
     const novoMedicamento = {
       ...this.formulario.value,
@@ -157,17 +155,19 @@ export class DrugRegistrationComponent implements OnInit {
     }
     paciente.medicamentos[medicamentoIndex] = novoMedicamento;
     this.pacienteService.atualizarPaciente(paciente.id, paciente)
+    alert("Medicamento editado com sucesso!")
     location.reload()
     
   }
   excluir() {
   const paciente = this.listaPacientes.find((p: any) => p.id === this.pacienteEscolhido.id );
   if (!paciente) {
-    throw new Error('Paciente não encontrado');
+    alert('Paciente não encontrado');
   }
   paciente.medicamentos = paciente.medicamentos.filter((m: any) => m.id !== this.url);
 
     this.pacienteService.atualizarPaciente(this.pacienteEscolhido.id, paciente)
+    alert("Medicamento excluído com sucesso!")
     location.reload()
   }
 

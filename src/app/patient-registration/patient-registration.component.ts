@@ -140,10 +140,12 @@ export class PatientRegistrationComponent {
   }
   editar() {
     this.router.params.subscribe((params: any) => {
+      this.calculateAge(this.formulario.get('dataNascimento')?.value)
       const paciente = {
         ...this.formulario.value,
         id: params.id,
         medicamentos: [],
+        idade: this.age
       }
       console.log(paciente);
       const resposta = this.pacienteService.atualizarPaciente(params.id, paciente)
